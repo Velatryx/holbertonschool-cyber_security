@@ -1,2 +1,2 @@
 #!/bin/bash
-dig "$1" any +short
+dig $1 any +short
