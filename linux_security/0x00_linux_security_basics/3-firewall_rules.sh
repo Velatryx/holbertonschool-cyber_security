@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo firewall-cmd --list-all-zones
+sudo iptables -L -v
