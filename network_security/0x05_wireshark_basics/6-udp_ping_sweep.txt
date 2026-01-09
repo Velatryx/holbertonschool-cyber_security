@@ -1,1 +1,1 @@
-icmp && udp.dstport && !(icmp.type == 3 && icmp.code == 3)
+icmp.type == 3 && icmp.code == 3 && udp.dstport
