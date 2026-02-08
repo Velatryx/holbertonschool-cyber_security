@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -n "$1" | openssl sha1 | awk '{print $2}'
+echo -n "$1" | sha1sum | awk '{print $1}'
