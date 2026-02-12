@@ -1,1 +1,1 @@
-selstatus
+selstatus\n
