@@ -1,2 +1,2 @@
 #!/bin/bash
-snmpwalk -v 2c -c public "$1" .1.3.6.1.2.1.1.1 2>/dev/null
+snmpwalk -v 2c -c public "$1" 2>/dev/null | grep "sysDescr"
