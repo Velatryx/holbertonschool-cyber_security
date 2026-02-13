@@ -1,2 +1,2 @@
 #!/bin/bash
-postconf smtpd_tls_security_level | grep -qE "may|encrypt"
+postconf smtconf smtpd_tls_security_level | grep -q "^smtpd_tls_security_level = \(may\|encrypt\)"
