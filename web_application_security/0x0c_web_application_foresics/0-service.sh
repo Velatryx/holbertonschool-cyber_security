@@ -1,5 +1,3 @@
 #!/bin/bash
 
-file=$1
-
-awk '{print $5}' $file | sort | uniq -c | sort -rn
+awk '{print $5}' auth.log | cut -d'[' -f1 | sort | uniq -c | sort -nr
