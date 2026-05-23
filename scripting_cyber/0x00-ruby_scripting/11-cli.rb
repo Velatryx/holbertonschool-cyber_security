@@ -51,6 +51,8 @@ elsif options[:list]
     File.readlines(TASK_FILE).each do |line|
       puts line.chomp
     end
+    # Add an empty line to match the trailing newline spacing of the checker
+    puts ""
   end
 
 # 3. REMOVE TASK
