@@ -48,11 +48,9 @@ if options[:add]
 elsif options[:list]
   if File.exist?(TASK_FILE) && !File.zero?(TASK_FILE)
     puts "Tasks:"
-    File.readlines(TASK_FILE).each do |line|
-      puts line.chomp
+    File.readlines(TASK_FILE).each_with_index do |line, index|
+      puts "#{index + 1}. #{line.chomp}"
     end
-    # Add an empty line to match the trailing newline spacing of the checker
-    puts ""
   end
 
 # 3. REMOVE TASK
