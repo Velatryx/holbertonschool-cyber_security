@@ -3,11 +3,9 @@ require 'optparse'
 
 TASK_FILE = 'tasks.txt'
 
-# Initialize an empty options hash
 options = {}
 
 opt_parser = OptionParser.new do |opts|
-  # Match the exact usage string format from the help menu
   opts.banner = "Usage: cli.rb [options]"
 
   opts.on("-a", "--add TASK", "Add a new task") do |task|
@@ -28,7 +26,6 @@ opt_parser = OptionParser.new do |opts|
   end
 end
 
-# Parse the command-line arguments safely
 begin
   opt_parser.parse!(ARGV)
 rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
@@ -50,11 +47,10 @@ if options[:add]
 # 2. LIST TASKS
 elsif options[:list]
   if File.exist?(TASK_FILE) && !File.zero?(TASK_FILE)
-    File.readlines(TASK_FILE).each_with_index do |line, index|
-      puts "#{index + 1}. #{line.chomp}"
+    puts "Tasks:"
+    File.readlines(TASK_FILE).each do |line|
+      puts line.chomp
     end
-  else
-    # Quiet exit if file doesn't exist or is empty
   end
 
 # 3. REMOVE TASK
@@ -64,12 +60,9 @@ elsif options[:remove]
   if File.exist?(TASK_FILE)
     lines = File.readlines(TASK_FILE)
     
-    # Check if index is valid (1-based index)
     if target_index > 0 && target_index <= lines.length
-      # Remove the element at the specified index (converting back to 0-based index)
       removed_task = lines.delete_at(target_index - 1).chomp
       
-      # Rewrite the remaining tasks back to the file
       File.open(TASK_FILE, 'w') do |file|
         lines.each { |line| file.write(line) }
       end
@@ -78,6 +71,5 @@ elsif options[:remove]
     end
   end
 else
-  # If no options are given, output the help manual
   puts opt_parser
 end
