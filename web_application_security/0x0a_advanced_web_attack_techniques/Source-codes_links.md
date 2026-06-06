@@ -4,3 +4,6 @@ https://github.com/hs-hq/web0x0a/blob/main/task_0/index.html
 
 ### Crack Session Secrets, decode:
 https://github.com/Paradoxis/Flask-Unsign
+
+### Web-h00k
+https://webhook.site
