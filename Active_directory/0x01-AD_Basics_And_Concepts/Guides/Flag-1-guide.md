@@ -20,27 +20,6 @@ Repo:
 =======================================================================================================================================================================================================
 
 
-Objective
-
-Service accounts are often poorly maintained. Sensitive information is sometimes stored directly in user attributes visible to any authenticated domain user. Your goal is to find what has been left behind.
-Your Mission
-
-    Focus on service accounts (accounts with prefixes like svc).
-
-    Inspect their attributes carefully.
-
-    Look beyond standard properties.
-
-    [!TIP]
-    Hint: The flag is stored in an attribute that is not shown by default enumeration. You need to explicitly request extended properties to retrieve it.
-
-Repository Details
-
-    GitHub Repository: holbertonschool-cyber_security
-
-    Directory: Active_directory/0x01-AD_Basics_And_Concepts
-
-    File: 1-flag.txt
 
 Stage 1: Initial Foothold via Evil-WinRM
 The Concept: What is WinRM?
@@ -49,19 +28,20 @@ Windows Remote Management (WinRM) is a native Windows protocol that enables admi
 
 During an assessment, if valid user credentials are compromised (in this instance, labuser), an operator can leverage tools like evil-winrm from an external attack platform (such as Kali Linux) to instantiate an interactive, remote PowerShell session.
 Execution Input (Kali Linux Host)
-Bash
 
+```Bash
 evil-winrm -i 10.10.X.X -u labuser -p 'Password123!'
+```
 
 Terminal Output
-PowerShell
+```PowerShell
 
 Evil-WinRM shell v3.5
 Info: Establishing connection to 10.10.X.X...
 Info: Connection established!
 
 PS C:\Users\labuser>
-
+```
 Technical Explanation
 
 The session establishes a remote, interactive loop running within the security context of the labuser account. Every command executed within this shell runs natively on the target Windows system.
@@ -69,9 +49,9 @@ Stage 2: Initial Identification of Service Accounts
 The Concept: Finding Target Object Hints
 
 During post-exploitation enumeration, inspecting environmental footprints (such as local registry entries, user properties, or session variables) revealed a comma-separated string containing explicit references to service accounts:
-Plaintext
-
+```Plaintext
 CN=svc_deploy;svc_web;SvcBackup;SvcWeb
+```
 
 Technical Explanation
 
@@ -97,17 +77,18 @@ $Searcher.Filter = "(&(objectCategory=person)(objectClass=user)(cn=svc*))"
 $Searcher.FindAll() | ForEach-Object { $_.Properties.distinguishedname }
 
 Resolution Output
-Plaintext
+```Plaintext
 
 CN=svc_deploy,CN=Users,DC=PENTESTLAB,DC=local
 CN=svc_web,CN=Users,DC=PENTESTLAB,DC=local
 CN=SvcBackup,OU=ServiceAccts,DC=PENTESTLAB,DC=local
 CN=SvcWeb,OU=ServiceAccts,DC=PENTESTLAB,DC=local
+```
 
 Comprehensive Automated Enumeration Script
 
 With the targets confirmed, the following script was executed to bind directly to each object path, force the calculation of constructed/hidden attributes, and dump all properties to the terminal.
-PowerShell
+```PowerShell
 
 $Accounts = @("svc_deploy", "svc_web", "SvcBackup", "SvcWeb")
 foreach ($Name in $Accounts) {
@@ -132,7 +113,7 @@ foreach ($Name in $Accounts) {
         Write-Output "Could not locate Distinguished Name for $Name"
     }
 }
-
+```
 Technical Breakdown of the Automation Mechanics
 
     [ADSISearcher]"(&(objectClass=user)(cn=$Name))": Utilizes the highly performant DirectorySearcher .NET class to execute a global LDAP query filter: "Find objects matching type user AND where the common name exactly matches our current tracking variable."
@@ -147,7 +128,7 @@ Stage 4: Attribute Log Analysis & Vulnerability Identification
 
 The script dumped complete attribute tables for the discovered accounts. Comprehensive analysis of the returned data blocks revealed multiple critical vulnerabilities and data exposures.
 Object 1: svc_deploy
-Plaintext
+`Plaintext
 
 objectClass          : {top, person, organizationalPerson, user}
 cn                   : {svc_deploy}
@@ -168,7 +149,7 @@ SchemaClassName      : user
     Analysis: Standard deployment account properties. No immediate high-severity configuration flaws identified within the baseline structural properties.
 
 Object 2: svc_web (Kerberos Constrained Delegation Flaw)
-Plaintext
+``Plaintext
 
 objectClass              : {top, person, organizationalPerson, user}
 cn                       : {svc_web}
@@ -196,7 +177,7 @@ If an operator compromises the cleartext password or the NetNTLM/NT hash of the 
     [!KEY]
     Captured Flag: FLAG5{f6c8d9e0a1b23456abcdefabcdefabcdef112233445566778899aabbccddeeff_powerview}
 
-Object 3: SvcBackup (Information Disclosure via Metadata)
+``Object 3: SvcBackup (Information Disclosure via Metadata)
 Plaintext
 
 objectClass          : {top, person, organizationalPerson, user}
@@ -219,7 +200,7 @@ Security Analysis
     [!KEY]
     Captured Flag: FLAG1{747fb213581c9cd487fc6e77bf4e54aa6321839fe023b0551ceef706cbc6}
 
-Object 4: SvcWeb
+``Object 4: SvcWeb
 Plaintext
 
 objectClass          : {top, person, organizationalPerson, user}
