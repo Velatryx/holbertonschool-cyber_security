@@ -17,7 +17,7 @@ Initial reconnaissance from the Kali Linux host targeted the Windows Server IP t
 
 ```bash
 nmap -p 389,3268 -Pn 10.0.2.4
-
+```
 The scan returned both ports as filtered, indicating that a host-based firewall on the Domain Controller blocks direct network traffic from unauthenticated external subnets.
 
 Because direct external enumeration was blocked, the attack vector shifted to an assumed-breach scenario, leveraging the provided WinRM credentials to pivot through the trusted internal Windows 11 workstation.
@@ -25,14 +25,14 @@ Phase 2: Establishing the Network Foothold
 
 Using evil-winrm, an authenticated remote PowerShell session was established from the Kali host to the Windows 11 machine.
 Bash
-
+```bash
 evil-winrm -i 10.0.2.3 -u labuser -p 'P@ssw0rd123!'
-
+```
 This dropped the execution context into a stable PowerShell prompt on the target subnet:
 PowerShell
-
+```
 *Evil-WinRM* PS C:\Users\labuser\Documents>
-
+```
 Phase 3: Directory Enumeration via ADSI
 
 Active Directory firewalls typically trust directory queries originating from domain-joined workstations. To extract the hidden flag from the root domain object without using specialized offensive tools that might trigger alerts, native Active Directory Service Interfaces (ADSI) were utilized.
@@ -41,6 +41,7 @@ The following script was executed in the WinRM session:
 PowerShell
 
 # Query the RootDSE to find the default naming context dynamically
+```PS
 $Domain = [ADSI]"LDAP://RootDSE"
 $RootDN = $Domain.defaultNamingContext
 
@@ -52,7 +53,7 @@ $ADObject.RefreshCache(@("*", "+"))
 
 # Display all properties
 $ADObject | Select-Object -Property *
-
+```
 Technical Logic of the Script:
 
     LDAP://RootDSE: Accesses the root of the directory server data tree to map the exact Distinguished Name (DC=PENTESTLAB,DC=local) dynamically.
@@ -72,16 +73,16 @@ Captured Flags
 🔑 Primary Flag
 
 Located inside the standard description attribute of the domain root:
-Plaintext
+```Plaintext
 
 description       : {FLAG{518f239e03cdf54404f6bc907997efcd60863dc920ee15aa73753ec6551e}}
-
+```
 🔑 Secondary Flag
 
 Located inside the adminDescription operational attribute:
-Plaintext
+```Plaintext
 
 adminDescription  : {PVFLAG{D0M41N_M4PP3D_W1TH_P0W3RV13W_F0}}
-
+```
     [!NOTE]
     The PVFLAG prefix and context indicate this attribute was configured to simulate the underlying API calls executed by domain enumeration tooling like PowerView.
