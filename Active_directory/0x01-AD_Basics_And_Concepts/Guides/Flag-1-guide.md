@@ -17,12 +17,35 @@ Repo:
     Directory: Active_directory/0x01-AD_Basics_And_Concepts
     File: 1-flag.txt
 
-=======================================================================================================================================================================
+=======================================================================================================================================================================================================
+
+
+Objective
+
+Service accounts are often poorly maintained. Sensitive information is sometimes stored directly in user attributes visible to any authenticated domain user. Your goal is to find what has been left behind.
+Your Mission
+
+    Focus on service accounts (accounts with prefixes like svc).
+
+    Inspect their attributes carefully.
+
+    Look beyond standard properties.
+
+    [!TIP]
+    Hint: The flag is stored in an attribute that is not shown by default enumeration. You need to explicitly request extended properties to retrieve it.
+
+Repository Details
+
+    GitHub Repository: holbertonschool-cyber_security
+
+    Directory: Active_directory/0x01-AD_Basics_And_Concepts
+
+    File: 1-flag.txt
 
 Stage 1: Initial Foothold via Evil-WinRM
 The Concept: What is WinRM?
 
-Windows Remote Management (WinRM) is a native Windows protocol that enables administrators to execute PowerShell commands remotely on a server. It typically listens on port 5985 (HTTP) or 5986 (HTTPS).  
+Windows Remote Management (WinRM) is a native Windows protocol that enables administrators to execute PowerShell commands remotely on a server. It typically listens on port 5985 (HTTP) or 5986 (HTTPS).
 
 During an assessment, if valid user credentials are compromised (in this instance, labuser), an operator can leverage tools like evil-winrm from an external attack platform (such as Kali Linux) to instantiate an interactive, remote PowerShell session.
 Execution Input (Kali Linux Host)
@@ -114,11 +137,11 @@ Technical Breakdown of the Automation Mechanics
 
     [ADSISearcher]"(&(objectClass=user)(cn=$Name))": Utilizes the highly performant DirectorySearcher .NET class to execute a global LDAP query filter: "Find objects matching type user AND where the common name exactly matches our current tracking variable."
 
-    .FindOne(): Executes the directory search index lookups and halts immediately upon finding the first valid metadata record.  
+    .FindOne(): Executes the directory search index lookups and halts immediately upon finding the first valid metadata record.
 
     [ADSI]"LDAP://$DN": Instantiates a DirectoryEntry bind directly to the absolute target directory structure.
 
-    .RefreshCache(@("*", "+")): Instructs the Domain Controller to pull down standard properties (*) alongside operational/constructed properties (+). Constructed attributes are calculated dynamically by the domain controller and are traditionally omitted from standard queries to reduce domain bandwidth consumption.  
+    .RefreshCache(@("*", "+")): Instructs the Domain Controller to pull down standard properties (*) alongside operational/constructed properties (+). Constructed attributes are calculated dynamically by the domain controller and are traditionally omitted from standard queries to reduce domain bandwidth consumption.
 
 Stage 4: Attribute Log Analysis & Vulnerability Identification
 
