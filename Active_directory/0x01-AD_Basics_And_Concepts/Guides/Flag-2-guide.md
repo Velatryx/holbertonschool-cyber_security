@@ -28,7 +28,7 @@ When establishing an initial foothold, operators frequently attempt interactive 
 
 ```bash
 evil-winrm -i 192.168.56.20 -u labuser -p 'Password123!'
-
+```
 Terminal Event Log
 Plaintext
 
@@ -57,7 +57,7 @@ Modern versions of ldapsearch on Kali Linux have deprecated the legacy host (-h)
 ⚡ Stage 3: Crafting the Target Attribute Query
 
 By passing verified domain credentials (P@ssw0rd123!), setting the base search path, and appending the user/operational wildcards (* and +), we force the Domain Controller to dump all hidden object properties.
-Bash
+```Bash
 
 ldapsearch -H ldap://192.168.56.20 \
   -x \
@@ -66,7 +66,7 @@ ldapsearch -H ldap://192.168.56.20 \
   -b "DC=PENTESTLAB,DC=local" \
   "(&(objectCategory=group)(|(cn=Domain Admins)(cn=Enterprise Admins)(cn=Backup Operators)))" \
   "*" "+"
-
+```
 Parameter Breakdown
 Switch	Purpose
 -H ldap://...	Specifies the targeted Domain Controller URI entrypoint.
