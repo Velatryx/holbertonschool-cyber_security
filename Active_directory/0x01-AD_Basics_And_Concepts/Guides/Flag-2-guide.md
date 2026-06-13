@@ -1,13 +1,6 @@
-Let's tighten this up. GitHub renders certain elements differently, and unofficial alert tags like [!KEY] will just display as raw text rather than a clean callout box.
-
-Here is a heavily optimized, clean, and highly readable version tailored specifically for GitHub Flavored Markdown (GFM). It fixes line wrapping issues in the LDIF log, utilizes valid GitHub alert blocks ([!NOTE], [!TIP], [!WARNING]), and streamlines the headers for a professional profile or repository writeup.
 Markdown
 
 # Active Directory Baseline Assessment: Group Metadata Inspection
-
-This technical writeup details the methodology for identifying hidden information leaks within Active Directory privileged group objects from an external attack platform.
-
----
 
 ## 🎯 Objective & Mission Parameters
 
