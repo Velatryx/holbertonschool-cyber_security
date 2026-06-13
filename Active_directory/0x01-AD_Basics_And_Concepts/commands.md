@@ -1,7 +1,3 @@
-Here is the structured, production-ready `commands.md` file. It is optimized for direct copy-pasting, cleanly categorized, and formatted specifically for terminal layout compatibility and fast deployment during live environment assessments.
-
----
-
 # 📂 commands.md
 
 ## 🚪 1. Remote Management & Shell Footholds
