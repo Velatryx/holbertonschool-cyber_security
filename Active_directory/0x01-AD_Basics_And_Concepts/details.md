@@ -21,3 +21,53 @@ PORT     STATE SERVICE
 MAC Address: 08:00:27:1E:B7:E4 (Oracle VirtualBox virtual NIC)
 
 Nmap done: 1 IP address (1 host up) scanned in 2.32 seconds
+
+
+TASK 3==========================================================
+┌──(root㉿kali)-[~]
+└─# evil-winrm -i 192.168.56.20 -u labuser -p 'P@ssw0rd123!'
+                                        
+Evil-WinRM shell v3.9
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: undefined method `quoting_detection_proc' for module Reline
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\labuser\Documents> Get-ChildItem -Path HKLM:\SOFTWARE
+
+
+    Hive: HKEY_LOCAL_MACHINE\SOFTWARE
+
+
+Name                           Property
+----                           --------
+Classes
+Clients
+DefaultUserEnvironment         Path : C:\Users\labuser\AppData\Local\Microsoft\WindowsApps;
+                               TEMP : C:\Users\labuser\AppData\Local\Temp
+                               TMP  : C:\Users\labuser\AppData\Local\Temp
+Google
+HolbertonLab                   TaskFlag : FLAG3{921d2a56bd128240587aa7abbcad0a37fb8e5c6e091fa763754f27648fbe}
+Intel
+Microsoft
+Mozilla
+ODBC
+OpenSSH
+Oracle
+Partner
+Policies
+RegisteredApplications         File Explorer             : SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Capabilities
+                               Paint                     : SOFTWARE\Microsoft\Windows\CurrentVersion\Applets\Paint\Capabilities
+                               Windows Address Book      : Software\Clients\Contacts\Address Book\Capabilities
+                               Windows Disc Image Burner : Software\Microsoft\IsoBurn\Capabilities
+                               Windows Photo Viewer      : Software\Microsoft\Windows Photo Viewer\Capabilities
+                               Windows Search            : Software\Microsoft\Windows Search\Capabilities
+                               Wordpad                   : Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Capabilities
+                               Internet Explorer         : SOFTWARE\Microsoft\Internet Explorer\Capabilities
+                               Windows Media Player      : Software\Clients\Media\Windows Media Player\Capabilities
+Setup
+WOW6432Node
+
+
+
