@@ -57,6 +57,7 @@ Explanation:
 ### Our Last mission is: Use the recovered credentials to authenticate and read a hidden LDAP attribute not visible through standard enumeration tools
 
 ┌──(kali㉿kali)-[~]
+
 └─$ ldapsearch -H ldap://192.168.56.20 -x -D "CN=Legacy User,OU=IT-ServiceAccounts,OU=IT,OU=PENTESTLAB-CORP,DC=PENTESTLAB,DC=local" -w 'Password123' -b "DC=PENTESTLAB,DC=local" "(sAMAccountName=legacy)" comment  
 \# extended LDIF
 \#
