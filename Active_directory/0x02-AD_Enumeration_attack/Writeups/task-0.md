@@ -67,10 +67,9 @@ Explanation:
 \#
 
 \# Legacy User, IT-ServiceAccounts, IT, PENTESTLAB-CORP, PENTESTLAB.local
-dn: CN=Legacy User,OU=IT-ServiceAccounts,OU=IT,OU=PENTESTLAB-CORP,DC=PENTESTLA
- B,DC=local
-comment: FLAG_M2_T0{fe952761a0d5d62e32caa49d4a72e57e8765def3e720d3f5600fd7285d
- 4a}
+dn: CN=Legacy User,OU=IT-ServiceAccounts,OU=IT,OU=PENTESTLAB-CORP,DC=PENTESTLAB,DC=local
+
+`comment: FLAG_M2_T0{fe952761a0d5d62e32caa49d4a72e57e8765def3e720d3f5600fd7285d4a}`
 
 \# search reference
 ref: ldap://ForestDnsZones.PENTESTLAB.local/DC=ForestDnsZones,DC=PENTESTLAB,DC
