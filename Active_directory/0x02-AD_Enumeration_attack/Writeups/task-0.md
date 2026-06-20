@@ -58,21 +58,21 @@ Explanation:
 
 ┌──(kali㉿kali)-[~]
 └─$ ldapsearch -H ldap://192.168.56.20 -x -D "CN=Legacy User,OU=IT-ServiceAccounts,OU=IT,OU=PENTESTLAB-CORP,DC=PENTESTLAB,DC=local" -w 'Password123' -b "DC=PENTESTLAB,DC=local" "(sAMAccountName=legacy)" comment  
-# extended LDIF
-#
-# LDAPv3
-# base <DC=PENTESTLAB,DC=local> with scope subtree
-# filter: (sAMAccountName=legacy)
-# requesting: comment 
-#
+\# extended LDIF
+\#
+\# LDAPv3
+\# base <DC=PENTESTLAB,DC=local> with scope subtree
+\# filter: (sAMAccountName=legacy)
+\# requesting: comment 
+\#
 
-# Legacy User, IT-ServiceAccounts, IT, PENTESTLAB-CORP, PENTESTLAB.local
+\# Legacy User, IT-ServiceAccounts, IT, PENTESTLAB-CORP, PENTESTLAB.local
 dn: CN=Legacy User,OU=IT-ServiceAccounts,OU=IT,OU=PENTESTLAB-CORP,DC=PENTESTLA
  B,DC=local
 comment: FLAG_M2_T0{fe952761a0d5d62e32caa49d4a72e57e8765def3e720d3f5600fd7285d
  4a}
 
-# search reference
+\# search reference
 ref: ldap://ForestDnsZones.PENTESTLAB.local/DC=ForestDnsZones,DC=PENTESTLAB,DC
  =local
 
