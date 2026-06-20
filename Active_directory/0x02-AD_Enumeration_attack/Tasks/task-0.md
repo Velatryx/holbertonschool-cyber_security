@@ -8,8 +8,11 @@ In Active Directory, Kerberos pre-authentication is enabled by default and requi
 Your mission:
 
   Enumerate all domain accounts and identify which ones have pre-authentication disabled
+  
   Request their AS-REP hashes from the Domain Controller
+  
   Crack the hash offline using a wordlist attack to recover the plaintext password
+  
   Use the recovered credentials to authenticate and read a hidden LDAP attribute not visible through standard enumeration tools
 
 Tools: `impacket-GetNPUsers`, `hashcat`, `ldapsearch`
