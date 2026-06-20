@@ -54,4 +54,6 @@ Explanation:
 
 `/usr/share/wordlists/rockyou.txt` (The Wordlist): The file path to your dictionary file. On Kali Linux, rockyou.txt is the standard pre-installed database containing over 14 million real-world passwords leaked in historical data breaches.
 
-### Our Last mission is:
+### Our Last mission is: Use the recovered credentials to authenticate and read a hidden LDAP attribute not visible through standard enumeration tools
+
+
