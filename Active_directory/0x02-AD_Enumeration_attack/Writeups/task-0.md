@@ -31,4 +31,27 @@ Brief Explanation:
 
 ### Our Second Mission is: Request their AS-REP hashes from the Domain Controller
 
+This one is pretty straightforward.
 
+```bash
+impacket-GetNPUsers PENTESTLAB.local/student:'password1234' -dc-ip 192.168.56.20 -outputfile asrep_hashes.txt
+```
+
+
+### Third mission is: Crack the hash offline using a wordlist attack to recover the plaintext password
+
+```bash
+hashcat -a 0 -m 18200 asrep_hashes.txt /usr/share/wordlists/rockyou.txt
+```
+
+Explanation:
+
+`-a 0` (Attack Mode): Specifies a straight Dictionary Attack. This tells Hashcat to read the wordlist line-by-line sequentially, without mixing words together or performing advanced brute-force variations.
+
+`-m 18200` (Hash Type): This is the precise internal code for Kerberos 5 AS-REP ETYPE 23 (RC4-HMAC). If the Domain Controller used modern encryption for the ticket wrapper, you would change this flag to -m 18100 to target Kerberos 5 AS-REP ETYPE 18 (AES-256).
+
+`asrep_hashes.txt` (Target File): Points to the output file created by your Impacket run containing the extracted $krb5asrep$ token strings.
+
+`/usr/share/wordlists/rockyou.txt` (The Wordlist): The file path to your dictionary file. On Kali Linux, rockyou.txt is the standard pre-installed database containing over 14 million real-world passwords leaked in historical data breaches.
+
+### Our Last mission is:
