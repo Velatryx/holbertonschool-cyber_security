@@ -22,18 +22,7 @@ When establishing an initial foothold, operators frequently attempt interactive 
 ```bash
 evil-winrm -i 192.168.56.20 -u labuser -p 'Password123!'
 ```
-Terminal Event Log
-Plaintext
 
-Evil-WinRM shell v3.9
-
-Info: Establishing connection to remote endpoint
-*Evil-WinRM* PS C:\> net.exe group /domain
-
-Error: An error of type WinRM::WinRMAuthorizationError happened, message is WinRM::WinRMAuthorizationError
-Error: Exiting with code 1
-
-Why Did This Fail?
 
     Target Architecture: An nmap sweep reveals ports 88 (Kerberos) and 389 (LDAP) are open on 192.168.56.20, identifying it as the Domain Controller (DC).
 
