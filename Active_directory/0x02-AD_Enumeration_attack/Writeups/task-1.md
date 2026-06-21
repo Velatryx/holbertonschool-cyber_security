@@ -56,6 +56,11 @@ nxc smb 192.168.56.20 -u svc_sql -p 'Password1' --share KerberosFlag --dir
 
 ```
 
+`--share <share_name>`: Now we specify the share
+
+`--dir`: listing the target share
+
+
 ### Our Last mission is: Exfiltrate the target file from the remote share and recover the hidden flag
 
 ┌──(root㉿kali)-[~]
