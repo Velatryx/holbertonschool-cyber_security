@@ -8,6 +8,13 @@ nxc ldap 192.168.56.20 -u student -p 'password1234' --base-dn "DC=PENTESTLAB,DC=
 
 ```
 
+**Alternatively**
+```bash
+ldapsearch -H ldap://192.168.56.20 -x -D "CN=student,CN=Users,DC=PENTESTLAB,DC=local" -w 'password1234' -b "DC=PENTESTLAB,DC=local" "(objectClass=user)" sAMAccountName description
+```
+
+where: `(objectClass=user)` ensures you only get user objects, and optionally we can add `(&(objectClass=user)(description=*))` instead to filter out users which have no description.
+
 **Analysis & Findings:** By authenticating against the LDAP service on port 389, we dumped the object attributes for domain users. Active Directory environments frequently suffer from informational leaks where administrators inadvertently expose cleartext passwords or configurations in account descriptions.
 
 * **Compromised Account Found:** `svc_app`  
