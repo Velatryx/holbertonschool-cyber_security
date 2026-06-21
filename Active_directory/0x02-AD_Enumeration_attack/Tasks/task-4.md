@@ -26,7 +26,7 @@ Hint 2 : Getting credentials:
 
 You already know how to extract credentials from accounts that have SPNs configured. That technique applies here too.
 
-**Hint 3 **: Abusing the rights:
+**Hint 3 ** : Abusing the rights:
 
 Once you have valid credentials for the privileged account, research what tool allows you to replicate domain secrets remotely. Think about what a Domain Controller does when it syncs with another DC.
 
