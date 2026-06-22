@@ -45,9 +45,24 @@ memberOf: CN=LDAP-Lab-Users,OU=Groups,OU=LDAP-Project,DC=PENTESTLAB,DC=local
 
 ```
 
+
+### NetExec Anonymous LDAP search:
+
+blueprint: nxc ldap <IP> -u <username> -p <password> --base-dn <base-dn> --query <"filter"> <"sections to be shown">  
+
+```bash
+nxc ldap 192.168.56.20 -u "" -p "" --base-dn "DC=PENTESTLAB,DC=local" --query "(|(info=*)(comment=*)(description=*))" "cn distinguishedName info comment description"
+```
+
+`-u ""` , `-p ""`: We basically set null values to username and password to make anonymous bind search
+
+`--query "(|(info=*)(comment=*)(description=*))" "cn distinguishedName info comment description"`: 
+
+Note: separate sections with spaces in query's second section.
+
 ---
 
-### Our Second Mission is: Extract custom flag data globally by targeting administrative descriptors
+### All possible flags set (OPTIONAL): Extract custom flag data globally by targeting administrative descriptors
 
 Blueprint:
 `ldapsearch [1. Authentication Type] [2. Target Connection] [3. Search Anchor] [4. Universal Target Filter] | grep [5. Filtering Keyword]`
