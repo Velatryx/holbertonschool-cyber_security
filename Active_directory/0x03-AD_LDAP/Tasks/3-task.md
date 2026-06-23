@@ -1,36 +1,16 @@
-### Our mission is to find the flag within a hidden property that Bloodhound does show.
 
-However, I was unable to retrieve the flag using Bloodhound, because it did not actually collect the hidden property at all.
+3. RPC User Enumeration: Enumerating Active Directory via RPC Protocol
 
-Still, I am providing the writeup for bloodhound data collection, and using it in GUI.
+Objective: Active Directory can be queried through multiple protocols. While LDAP is the most common, the RPC protocol exposes user and group information through a completely different interface rpcclient. Some attributes accessible via RPC are not returned by standard LDAP queries.
 
-## First, let's collect the domain data. You cannot perform an anonymous search with Bloodhound to my knowledge using null user or pass like 
-ldapsearch or nxc ldap.
+Your mission:
 
-Blueprint: bloodhound-python -u <"USER"> -p <"PASS"> -d <DOMAIN> -ns <TARGET_IP> -c All --zip (optionally you can add --dns-tcp for more reliable connection)
+    Connect to the Domain Controller using rpcclient
+    Enumerate domain users using RPC-specific commands
+    Query individual user details to find the hidden flag
 
-```Bash
-bloodhound-python -u 'student' -p 'password1234' -d PENTESTLAB.local -ns 192.168.56.20 -c All --zip
-```
+Tool:rpcclient
 
-It collects the domain info, and zips them. We import it by logging in to the GUI version of it on http://localhost:8080, sign in with the credentials (default: admin,admin)
+Hint: Once connected, explore commands like enumdomusers to list users and queryuser to inspect individual accounts. Pay attention to all fields returned especially for accounts that appear disabled or inactive.
 
-Use Quick Upload to upload the zip folder;
-
-Go to explore tab to start visualizing the data;
-
-For example, type 'Users' on search bar, and select a node to visualize the nodes and connections. An example would seem like this:
-
-<img width="2879" height="1419" alt="image" src="https://github.com/user-attachments/assets/aee3c2bc-537d-4bea-b41f-a25c2af3ea16" />
-
-
-Simply, click on a node, go through the properties, or choose members and go through theirs.
-
----
-
-However, to find the flag, I used:
-
-```bash
-nxc ldap -u 'student' -p 'password1234' --users --base-dn "DC=PENTESTLAB,DC=local--query "(|(wWWHomePage=*)(comment=*)(description=*))" "cn distinguishedName wWWHomePage comment description"
-```
-
+Flag location: A user field returned by rpcclient queryuser not visible in standard LDAP queries.
