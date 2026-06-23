@@ -30,7 +30,7 @@ Simply, click on a node, go through the properties, or choose members and go thr
 
 However, to find the flag, I used:
 
-``bash
+```bash
 nxc ldap -u 'student' -p 'password1234' --users --base-dn "DC=PENTESTLAB,DC=local--query "(|(wWWHomePage=*)(comment=*)(description=*))" "cn distinguishedName wWWHomePage comment description"
 ```
 
