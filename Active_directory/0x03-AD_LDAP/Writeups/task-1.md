@@ -1,4 +1,4 @@
-### Our first mission is: Enumerate Active Directory user attributes at scale using NetExec
+### Our mission is: Enumerate Active Directory user attributes at scale using NetExec
 
 Blueprint:
 `nxc [1. Protocol] [2. Target IP] -u [3. Username] -p [4. Password] --base-dn [5. Search Anchor] [6. Operational Flag] --query [7. Target Filter] [8. Selected Attributes]`
