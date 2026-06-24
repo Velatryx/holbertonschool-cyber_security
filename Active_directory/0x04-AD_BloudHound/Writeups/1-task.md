@@ -16,13 +16,13 @@ Blueprint:
 Command:
 
 
-# Phase 1: Enumerate all user objects via LDAP
+### Phase 1: Enumerate all user objects via LDAP
 
 ```bash
 nxc ldap 192.168.56.20 -u bh_intern -p 'User@2025!' --users
 ```
 
-# Phase 2: Sanitize output and isolate raw usernames into a text list
+### Phase 2: Sanitize output and isolate raw usernames into a text list
 
 ```bash
 nxc ldap 192.168.56.20 -u bh_intern -p 'User@2025!' --users | awk '/LDAP.*DC01/ {print $5}' | tee users.txt
