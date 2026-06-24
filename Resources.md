@@ -6,6 +6,8 @@ https://www.thehacker.recipes/
 
 https://swisskyrepo.github.io/PayloadsAllTheThings/
 
+https://payloadplayground.com/cheatsheets
+
 
 
 ### Active Directory
@@ -17,3 +19,5 @@ https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet
 ### Web Exploitation
 
 https://github.com/bryanroma/web-pentesting
+
+https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/File_Upload_Cheat_Sheet.md
