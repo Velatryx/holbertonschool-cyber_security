@@ -98,7 +98,8 @@ nxc ldap 192.168.56.20 -u 'tempadmin' -p 'Password123' --base-dn "DC=PENTESTLAB,
 ```
 
 
-<img width="2990" height="1565" alt="Screenshot From 2026-06-22 22-06-19" src="https://github.com/user-attachments/assets/86eaa7bc-7dc4-4086-b7c1-e31f0ae93653" />
+<img width="2998" height="1591" alt="Screenshot From 2026-06-24 19-48-59" src="https://github.com/user-attachments/assets/7eeebda3-a649-441f-af80-a0c9d2db1eb3" />
+
 
 
 Explanation:
