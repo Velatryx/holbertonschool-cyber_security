@@ -119,6 +119,8 @@ impacket-ticketer -nthash 5bc68a017e37f5da683a3e4128630abc -domain-sid "S-1-5-21
 
 ```
 
+## NOTE: While -nthash was functional in this lab context, utilizing the -aesKey (AES256-CTS-HMAC-SHA1-96, Etype 0x12) is the preferred engineering standard to match natural Windows 10/11/Server 2022+ Kerberos tendencies and evade basic crypto-anomaly detection.
+
 Explanation:
 
 * `impacket-lookupsid`: Launches a Security Identifier lookup routine to systematically brute force and map organizational database structural identifiers.
