@@ -25,3 +25,5 @@ https://github.com/bryanroma/web-pentesting
 [sqlmap waf bypass] https://medium.com/@drag0n/sqlmap-tamper-scripts-sql-injection-and-waf-bypass-c5a3f5764cb3
 
 [sqlmap usage] https://isosecu.com/blog/advanced-sqlmap-usage
+
+[sqlmap bypass] https://github.com/gagaltotal/Bypass-WAF-SQLMAP
