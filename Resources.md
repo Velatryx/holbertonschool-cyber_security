@@ -8,6 +8,8 @@ https://swisskyrepo.github.io/PayloadsAllTheThings/
 
 https://payloadplayground.com/cheatsheets
 
+https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/index.html
+
 
 
 ### Active Directory
