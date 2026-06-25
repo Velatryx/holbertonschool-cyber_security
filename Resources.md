@@ -27,3 +27,5 @@ https://github.com/bryanroma/web-pentesting
 [sqlmap usage] https://isosecu.com/blog/advanced-sqlmap-usage
 
 [sqlmap bypass] https://github.com/gagaltotal/Bypass-WAF-SQLMAP
+
+[SSTI Blacklist Bypass] https://github.com/ivy2320/SSTI-vulnerability-in-a-blacklisted-environment
