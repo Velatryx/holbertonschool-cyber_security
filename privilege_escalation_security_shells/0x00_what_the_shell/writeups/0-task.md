@@ -16,6 +16,7 @@ attempt 4 (FOUND): $ cat /home/user/????
 
 CTF{who_needs_espace_when_u_have_bash_HASH : 03802581490b263f973aba02eac2ad2a}
 
+---
 
 Other file contents inside /home/user: (NOTE THAT 'sh' is also blacklisted, so I used shell globbing technique again)
 
