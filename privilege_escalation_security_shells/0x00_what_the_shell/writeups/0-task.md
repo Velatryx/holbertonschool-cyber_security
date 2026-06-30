@@ -1,5 +1,10 @@
-I used ssh to connect to the machine: ssh user@IP
+### Goal is to retrieve the flag in /home/user/flag, however, some commands and strings like `flag` are restricted.
 
+First, I used ssh to connect to the machine: ssh user@IP
+
+My attempts:
+
+I tried exporting the path and read it, but forgot 'flag' is restricted.
 attempt 1: $ export $FILE=/home/user/flag
 
 Hemm you know flag is blacklisted.
@@ -12,6 +17,7 @@ attempt 3$ cat /home/user/*
 
 Hemm you know \* is blacklisted.
 
+Finally, I used shell globbing, matching the count of '?' to length of 'flag' string.
 attempt 4 (FOUND): $ cat /home/user/????
 
 CTF{who_needs_espace_when_u_have_bash_HASH : 03802581490b263f973aba02eac2ad2a}
