@@ -4,8 +4,9 @@ First, I used ssh to connect to the machine: ssh user@IP
 
 Then, I used shell globbing, matching the count of '?' to length of 'flag' string.
 
+```bash
 $ cat /home/user/????
-
+```
 CTF{who_needs_espace_when_u_have_bash_HASH : 03802581490b263f973aba02eac2ad2a}
 
 ---
