@@ -5,6 +5,7 @@ First, I used ssh to connect to the machine: ssh user@IP
 My attempts:
 
 I tried exporting the path and read it, but forgot 'flag' is restricted.
+
 attempt 1: $ export $FILE=/home/user/flag
 
 Hemm you know flag is blacklisted.
