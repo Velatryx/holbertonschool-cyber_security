@@ -33,5 +33,7 @@ $ cat /home/user/run.??
 $ cat /home/user/wrapper.sh
 
 Hemm you know sh is blacklisted.
+
 $ cat /home/user/wrapper.??
+
 #!/bin/bash # Change directory to root cd / # Execute the entrypoint script exec /home/user/entrypoint.sh
