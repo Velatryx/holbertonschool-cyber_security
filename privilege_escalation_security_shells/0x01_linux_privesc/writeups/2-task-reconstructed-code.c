@@ -47,3 +47,76 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+
+---
+---
+---
+---
+
+---
+
+OR
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main(int argc, char *argv[]) {
+    // [rbp-0x21] to [rbp-0x19]: An 8-byte key buffer + 1 byte for null terminator
+    char key[9];
+    
+    // [rbp-0x470]: A 1024-byte array tracking frequencies for 256 possible ASCII characters
+    // (Initialized via standard compiler `rep stos` optimization)
+    unsigned int counts[256];
+    memset(counts, 0, sizeof(counts));
+
+    // Initialize the key variable to "11111111" (0x3131313131313131)
+    *(unsigned long long *)key = 0x3131313131313131ULL;
+    key[8] = '\0';
+
+    // [rbp-0x70]: Local buffer for the input string.
+    char buffer[79]; 
+
+    // Loop counters
+    int i = 0; // [rbp-0x14]
+    int j = 0; // [rbp-0x18]
+
+    // Verify command-line arguments (argc == 2)
+    if (argc != 2) {
+        printf("Usage: %s <input>\n", argv[0]); 
+        return 1;
+    }
+
+    // VULNERABLE: Unbounded string copy into a bounded stack buffer
+    strcpy(buffer, argv[1]);
+
+    // Print the received buffer
+    printf("Buffer: %s\n", buffer);
+
+    // Character frequency counting loop
+    for (i = 0; (size_t)i < strlen(buffer); i++) {
+        unsigned char ch = (unsigned char)buffer[i];
+        counts[ch] = counts[ch] + 1;
+    }
+
+    // Loop through all possible ASCII values to print counts
+    for (j = 0; j <= 255; j++) {
+        if ((int)counts[j] > 0) {
+            printf("%c: %d\n", j, counts[j]);
+        }
+    }
+
+    // Privilege escalation safety check
+    // Compares our key against the hidden secret key "22222222"
+    if (strcmp(key, "22222222") == 0) {
+        setuid(0);
+        setgid(0);
+        system("/bin/bash");
+    }
+
+    return 0;
+}
