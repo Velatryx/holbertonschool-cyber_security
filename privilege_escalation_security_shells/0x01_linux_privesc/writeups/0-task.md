@@ -40,7 +40,7 @@ Bash
 root@f8b9a81ceff046b4a38db74880ec16c7-2377118072:~# ls
 flag.txt
 root@f8b9a81ceff046b4a38db74880ec16c7-2377118072:~# cat flag.txt
-cac96cbf03c8690df8d97e34be194cf1root@f8b9a81ceff046b4a38db74880ec16c7-2377118072:~#
+cac96cbf03c8690df8d97e34be194cf1
 ```
 
 
