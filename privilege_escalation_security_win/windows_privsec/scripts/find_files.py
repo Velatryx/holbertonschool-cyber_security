@@ -1,4 +1,3 @@
-murad@fedora:~$ cat find_files.py 
 #!/usr/bin/python3
 
 # Import os for using useful os classes
