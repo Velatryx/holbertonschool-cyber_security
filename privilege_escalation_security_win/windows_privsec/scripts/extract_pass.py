@@ -10,7 +10,7 @@ def extract_password(file_path):
     and returns the matched value if found.
     """
     # Regex pattern to capture the value inside <AdministratorPassword> <Value>...</Value>
-    # Supports potential spaces or newlines (\s*) between the tags
+    # Supporting potential spaces or newlines (\s*) between the tags
     pattern = r'<AdministratorPassword>\s*<Value>(.*?)</Value>'
     
     try:
@@ -18,7 +18,7 @@ def extract_password(file_path):
             content = f.read()
             match = re.search(pattern, content, re.DOTALL)
             if match:
-                # Group(1) contains the string inside the (.*?) parentheses
+                # contains the string inside the (.*?) parentheses
                 return match.group(1).strip()
     except Exception as e:
         # Handle cases where files are locked, unreadable, or permission is denied
@@ -43,7 +43,7 @@ def find_files(targets, base_dir=""):
                 print(f'[+] Found file: {file} in {path}')
                 # Now let's append all the found files to a list we created
                 targets_found.append(file)
-                # --- INTEGRATION: Call the extraction function on the found file ---
+                #nINTEGRATION; Call the extraction function on the found file(s)
                 extracted_val = extract_password(path)
                 if extracted_val:
                     print(f'[*] Extracted Password: {extracted_val}')
