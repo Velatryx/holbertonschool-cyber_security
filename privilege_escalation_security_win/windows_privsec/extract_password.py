@@ -49,7 +49,7 @@ def find_files(targets, base_dir=""):
                 extracted_val = extract_password(path)
                 if extracted_val:
                     print(f'[*] Extracted Password: {extracted_val}')
-                    print(f'[*] Decoded Password: {base64.b64decode(extracted_val).decode('ascii')}
+                    print(f'[*] Decoded Password: {base64.b64decode(extracted_val).decode("ascii")}')
                 else:
                     print(f'[-] No matching password tags found in this file.')
 
