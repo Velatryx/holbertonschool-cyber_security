@@ -28,10 +28,9 @@ def extract_password(file_path):
     return None
 
 
-# Lets first find the files passed in fun main.
-# Also let's pass two arguments to this function to determine targets, and starting directory. Add 2 '\\' instead of 1, because it escapes the next character.
+
 def find_files(targets, base_dir=""):
-    # Create an empty list to add target files
+    
     targets_found = list()
     # os.walk gives the result in 3 pieces, the starting root dir, found folders and subfolders, and files inside:
     print(f'Starting search for {targets}...\n')
@@ -42,14 +41,18 @@ def find_files(targets, base_dir=""):
                 # we show a complete path of the file
                 path = os.path.join(root, file)
                 print(f'[+] Found file: {file} in {path}')
-                # Now let's append all the found files to a list we created
+                
                 targets_found.append(file)
-                # nINTEGRATION; Call the extraction function on the found file(s)
+            
                 extracted_val = extract_password(path)
                 if extracted_val:
                     print(f'[*] Extracted Password: {extracted_val}')
-                    ascii_string = extracted_val.base64.b64decode(extracted_val).decode('ascii')
-                    print(f'[+] Extracted Password: {ascii_string}')
+                    try:
+                        # FIXED: Calling base64 directly and using utf-8 to be safe
+                        ascii_string = base64.b64decode(extracted_val).decode('utf-8')
+                        print(f'[+] Decoded Password: {ascii_string}')
+                    except Exception as decode_error:
+                        print(f'[-] Failed to decode base64 value: {decode_error}')
                 else:
                     print(f'[-] No matching password tags found in this file.')
 
@@ -64,7 +67,7 @@ def find_files(targets, base_dir=""):
         print(f'\n[?] Are you sure you typed them correctly?')
 
 
-# Now, let's pass the arguments, like the target files we look for.
+
 if __name__ == '__main__':
     target_files = ["sysprep.inf", "autounattend.xml", "Unattend.xml"]
     find_files(targets=target_files, base_dir="C:\\")
