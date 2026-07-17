@@ -59,7 +59,7 @@ def find_files(targets, base_dir=""):
                     try:
                         ascii_string = base64.b64decode(clean_val).decode('utf-8')
                         print(f'[+] Extracted Password: {ascii_string}')
-                        admin_user = "Administrator"
+                        admin_user = "SuperAdministrator"
                         admin_pass = ascii_string
                         program = "NeedsAdminPrivilege.exe"
                         
