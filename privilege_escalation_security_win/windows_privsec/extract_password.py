@@ -68,3 +68,5 @@ def find_files(targets, base_dir=""):
 if __name__ == '__main__':
     target_files = ["sysprep.inf", "autounattend.xml", "Unattend.xml"]
     find_files(targets=target_files, base_dir="C:\\")
+
+    input("\nPress Enter to exit...")
