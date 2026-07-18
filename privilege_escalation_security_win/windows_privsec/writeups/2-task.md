@@ -72,7 +72,13 @@ Permissions       : AllAccess
 ## What is a Ghost DLL Hijacking?
 
 ```
-The DLL Ghost technique is a specific subset of the broader DLL hijacking methodology. While traditional DLL hijacking involves replacing legitimate DLLs or manipulating the search order to load malicious libraries, the Ghost technique specifically exploits references to non-existent DLLs within Windows systems by taking advantage of DLL files that are referenced but don't actually exist in the Windows operating system.
+The DLL Ghost technique is a specific subset of the broader DLL hijacking methodology.
+While traditional DLL hijacking involves replacing legitimate DLLs
+or manipulating the search order to load malicious libraries, the Ghost technique
+specifically exploits references to non-existent DLLs within Windows systems by taking
+advantage of DLL files that are referenced but don't actually exist in the Windows operating system.
 
-This technique enables adversaries to achieve persistence, escalate privileges, and evade detection by placing malicious DLLs in locations where the operating system expects to find certain libraries, even though these libraries were never present on the system.
+This technique enables adversaries to achieve persistence, escalate privileges,
+and evade detection by placing malicious DLLs in locations where the operating system expects to find
+certain libraries, even though these libraries were never present on the system.
 ```
