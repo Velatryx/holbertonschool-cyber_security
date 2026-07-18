@@ -63,3 +63,6 @@ General
     Ensure detailed output is provided for each privilege escalation method tested, with results saved in a results.md file.
     You are not allowed to use hardcoded credentials; instead, utilize secure methods to handle credentials.
 
+
+> Diclaimer
+> This repository is maintained strictly for ethical hacking education, verified professional training courses, and authorized security assessments. Operating security tools or attempting privilege escalation against external targets without explicit, prior written legal consent is strictly illegal.
