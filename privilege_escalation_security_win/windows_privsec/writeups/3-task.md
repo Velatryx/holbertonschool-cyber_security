@@ -8,3 +8,7 @@ Get-ChildItem -Path .\Documents\PowerShell -Recurse -Filter *.txt | ForEach-Obje
     }
 }
 ```
+
+I found the attacker used the password: Stud1337Password@123 to login to SuperAdministrator. So I used it too.
+
+db9837d92367ebc82c71a2b87c16016c 
