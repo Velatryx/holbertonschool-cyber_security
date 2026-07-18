@@ -75,3 +75,12 @@ nc -lvnp 80 > hives.zip
 ```
 
 ![images](https://github.com/Velatryx/holbertonschool-cyber_security/blob/main/privilege_escalation_security_win/windows_privsec/Images/Screenshot%20From%202026-07-18%2014-11-39.png)
+
+> Secretsdump.py
+
+```shell
+
+```
+```
+Enable-NetFirewallRule -Name "FPS-ICMP4-ERQ-In"
+```
