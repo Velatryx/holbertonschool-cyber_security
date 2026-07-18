@@ -12,9 +12,9 @@
 > Run a basic privcheck
 
 ```powershell
-powershell -ep bypass -c ". .\PrivescCheck.ps1; Invoke-PrivescCheck"
+powershell -ep bypass -c ". .\PrivescCheck.ps1; Invoke-PrivescCheck -Extended -Report PrivescCheck_$($env:COMPUTERNAME) -Format TXT,HTML"
 ```
 
-> Output:
+> The extended check will save the output as .txt and .html. You can download the html and open it in the new tab to analyze it further [here](writeups/1-task.html)
 
 
