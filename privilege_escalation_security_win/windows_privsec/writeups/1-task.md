@@ -1,4 +1,3 @@
-<img width="2511" height="1519" alt="image" src="https://github.com/user-attachments/assets/7a68b894-01e9-49ef-b952-d3e1cea808fd" />
 ## Windows PrivEsc, task 1:
 
 ---
