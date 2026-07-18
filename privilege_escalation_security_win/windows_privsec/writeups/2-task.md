@@ -105,7 +105,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved) {
 
 ---
 
-> Downloaded the SprintCSP.dll and .exe file. Copy it to \Confluence\bin, and execute the .exe file.
+> Downloaded the SprintCSP.dll and .exe file. Copy it the dll into \Confluence\bin, and execute the .exe file.
 
 ```powershell
 PS C:\Users\Student\Downloads> .\WIN10RpcClient.exe
