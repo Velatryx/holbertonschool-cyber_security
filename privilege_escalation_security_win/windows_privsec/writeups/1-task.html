@@ -1,0 +1,1905 @@
+<html lang="en-US">
+<title>PrivescCheck Report</title>
+<head>
+<style>
+body {
+    font: 1.2em normal Arial,sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    color: white;
+    background: grey;
+    text-align: center;
+    padding: 5px 0;
+    white-space: nowrap;
+}
+
+tr {
+    border: 6px solid white;
+}
+
+td {
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    max-width: 800px;
+}
+
+tbody td:nth-child(3) {
+    text-align: left;
+}
+
+/* Render output results with 'pre' style */
+tbody td:nth-child(5) {
+    white-space: pre;
+    margin: 1em 0px;
+    padding: .2rem .4rem;
+    font-size: 87.5%;
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    text-align: left;
+}
+
+.scroll {
+    max-height: 200px;
+    max-width: 800px;
+    overflow: auto;
+}
+
+.label {
+    color: white;
+    margin: 8px;
+    padding: 6px;
+    display: block;
+    width: 60px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+a svg { height: 1em; color: white; }
+
+.bg_green { background-color: green; }
+.bg_blue { background-color: royalblue; }
+.bg_orange { background-color: orange; }
+.bg_red { background-color: red; }
+.bg_grey { background-color: grey; }
+.bg_blue_light { background-color: #eaf7ff; }
+.bg_orange_light { background-color: #fff7ea; }
+.bg_red_light { background-color: #ffeaea; }
+.bg_grey_light { background-color: #f8f8f8; }
+</style>
+</head>
+<body>
+<table> <colgroup><col/><col/><col/><col/><col/></colgroup> <tr><th>Category</th><th>DisplayName</th><th>Description</th><th>Severity</th><th>ResultRawString</th></tr> <tr><td>TA0001 - Initial Access</td><td>Hardening - BitLocker</td><td>Check whether BitLocker is enabled on the system drive and requires a second factor of authentication (PIN or startup key). Note that this check might yield a false positive if a third-party drive encryption software is installed.</td><td>None</td><td>
+
+MachineRole : Workstation
+TpmPresent  : 
+Description : Failed to retrieve BitLocker encryption status on system drive.
+
+
+
+</td></tr> <tr><td>TA0001 - Initial Access</td><td>Network - Network Selection From Lock Screen</td><td>Check whether the &#39;Do not display network selection UI&#39; policy is enabled on workstations (CVE-2021-28316 - Airstrike attack).</td><td>Low</td><td>
+
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows\System
+Value       : DontDisplayNetworkSelectionUI
+Data        : (null)
+Description : The network selection UI is displayed on the logon screen (default).
+
+
+
+</td></tr> <tr><td>TA0001 - Initial Access</td><td>Network - Wi-Fi Profiles</td><td>Get information about saved Wi-Fi profiles. Clear-text pre-shared keys (PSK) are displayed when possible, and potentially vulnerable 802.1x profiles are listed.</td><td>None</td><td></td></tr> <tr><td>TA0003 - Persistence</td><td>Configuration - COM Missing Image Files</td><td>Check whether there are leftover COM servers registered with non-existent modules. Such issues could be leveraged for lateral movement or persistence.</td><td>Low</td><td>
+
+Id              : a530d54a-dba0-4b17-9f99-51a7a2cc17ca
+Name            : Tethering Setting Handler
+RegPath         : HKLM\SOFTWARE\Classes\CLSID\{a530d54a-dba0-4b17-9f99-51a7a2cc17ca}
+HandlerType     : InProcServer32
+HandlerRegPath  : HKLM\SOFTWARE\Classes\CLSID\{a530d54a-dba0-4b17-9f99-51a7a2cc17ca}\InProcServer32
+HandlerDataType : FilePath
+HandlerData     : C:\Windows\System32\TetheringSettingHandler.dll
+
+Id              : b35913a2-be2e-4fa6-978c-3b130a7efb98
+Name            : QuickActionsPS
+RegPath         : HKLM\SOFTWARE\Classes\CLSID\{b35913a2-be2e-4fa6-978c-3b130a7efb98}
+HandlerType     : InprocServer32
+HandlerRegPath  : HKLM\SOFTWARE\Classes\CLSID\{b35913a2-be2e-4fa6-978c-3b130a7efb98}\InprocServer32
+HandlerDataType : FilePath
+HandlerData     : C:\Windows\System32\QuickActionsPS.dll
+
+
+
+</td></tr> <tr><td>TA0003 - Persistence</td><td>Hardening - UEFI &amp; Secure Boot</td><td>Check whether UEFI and Secure Boot are supported and enabled. Note that Secure Boot requires UEFI.</td><td>Low</td><td>
+Name        Vulnerable Description                
+----        ---------- -----------                
+UEFI             False BIOS mode is UEFI.         
+Secure Boot       True Secure Boot is not enabled.
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Applications - File Permissions</td><td>Check whether the current user has any write permissions on non-default or third-party applications.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Applications - Root Folder Permissions</td><td>Check whether the current user has any modification right on or within a folder located at the root of a &#39;fixed&#39; drive.</td><td>None</td><td>
+
+Path            : C:\$WINDOWS.~BT
+Modifiable      : False
+ModifiablePaths : 
+Vulnerable      : False
+Description     : The current user does not have modification rights on this root folder. A total of 141 common application files were found. The current user does not have any modification right on them.
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Applications - Startup Application Permissions</td><td>Check whether the current user has any write permissions on system-wide applications that are run at startup for all users.</td><td>None</td><td>
+
+Name         : SecurityHealth
+Path         : HKLM\Software\Microsoft\Windows\CurrentVersion\Run\SecurityHealth
+Data         : %windir%\system32\SecurityHealthSystray.exe
+IsModifiable : False
+
+Name         : VMware User Process
+Path         : HKLM\Software\Microsoft\Windows\CurrentVersion\Run\VMware User Process
+Data         : &quot;C:\Program Files\VMware\VMware Tools\vmtoolsd.exe&quot; -n vmusr
+IsModifiable : False
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - Application Repair UAC Prompt</td><td>Check whether the UAC prompt displayed when attempting an application repair through the Windows Installer was disabled.</td><td>None</td><td>
+
+Key                        : HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer
+DisableLUAInRepair         : (null)
+SecureRepairPolicy         : (null)
+SecureRepairWhitelistCount : 0
+Description                : The User Account Control (UAC) prompts for credentials before initiating an application repair.
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - Application Repair Whitelist</td><td>Check whether a whitelist of MSI packages is set in the registry to disable UAC prompts, and whether they have custom actions that may be leveraged for local privilege escalation.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - COM Image File Permissions</td><td>Check whether the current user has any modification rights on a COM server module file. This may not necessarily result in a privilege escalation. Further analysis is required.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - COM registry permissions</td><td>Check whether the current user has any modification rights on a COM server in the registry. This may not necessarily result in a privilege escalation. Further analysis is required.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - COM Server Ghost DLLs</td><td>Check whether there are COM servers registered with a non-existent module using a relative path. This may not necessarily result in a privilege escalation. You would also need to have rights to create files in a PATH folder. Further analysis is required.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - MSI AlwaysInstallElevated</td><td>Check whether the &#39;AlwaysInstallElevated&#39; policy is enabled system-wide and for the current user. If so, the current user may install a Windows Installer package with elevated (SYSTEM) privileges.</td><td>None</td><td>
+
+LocalMachineKey   : HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer
+LocalMachineValue : AlwaysInstallElevated
+LocalMachineData  : (null)
+Description       : AlwaysInstallElevated is not enabled in HKLM.
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - NTLM Downgrade (NTLMv1)</td><td>Check whether the machine is vulnerable to NTLM downgrade attacks. If so, a local or remote attacker could capture the NTLMv1 authentication of the computer account (or another authenticated user), and recover its NT hash offline.</td><td>None</td><td>
+
+NtlmMinServerSec                        : 536870912
+NtlmMinServerSecDescription             : Require 128-bit encryption
+BlockNtlmv1SSO                          : 0
+BlockNtlmv1SSODescription               : The request to generate NTLMv1-credentials for a logged-on user is audited but allowed to succeed. Warning events are generated. This setting is also called Audit mode.
+NtlmMinClientSec                        : 536870912
+NtlmMinClientSecDescription             : Require 128-bit encryption
+RestrictSendingNTLMTraffic              : 0
+RestrictSendingNTLMTrafficDescription   : Allow all
+RestrictReceivingNTLMTraffic            : 0
+RestrictReceivingNTLMTrafficDescription : Allow all
+LmCompatibilityLevel                    : 3
+LmCompatibilityLevelDescription         : Send NTLMv2 response only
+CredentialGuard                         : Credential Guard is not configured. Credential Guard is not running.
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - PATH Folder Permissions</td><td>Check whether the current user has any write permissions on the system-wide PATH folders. If so, the system could be vulnerable to privilege escalation through ghost DLL hijacking.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Configuration - Point and Print</td><td>Check whether the Print Spooler service is enabled and if the Point and Print configuration allows non-administrator users to install printer drivers.</td><td>None</td><td>
+
+Policy      : Limits print driver installation to Administrators
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+Value       : RestrictDriverInstallationToAdministrators
+Data        : (null)
+Default     : 1
+Expected    : &lt;null|1&gt;
+Description : Installing printer drivers when using Point and Print requires administrator privileges (default). Note: this setting supersedes any other (Package) Point and Print setting.
+
+Policy      : Point and Print Restrictions &gt; NoWarningNoElevationOnInstall
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+Value       : NoWarningNoElevationOnInstall
+Data        : (null)
+Default     : 0
+Expected    : &lt;null|0&gt;
+Description : Show warning and elevation prompt (default).
+
+Policy      : Point and Print Restrictions &gt; UpdatePromptSettings
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+Value       : UpdatePromptSettings
+Data        : (null)
+Default     : 0
+Expected    : &lt;null|0&gt;
+Description : Show warning and elevation prompt (default).
+
+Policy      : Point and Print Restrictions &gt; TrustedServers
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+Value       : TrustedServers
+Data        : (null)
+Default     : 0
+Expected    : N/A
+Description : Users can point and print to any server (default).
+
+Policy      : Point and Print Restrictions &gt; InForest
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+Value       : InForest
+Data        : (null)
+Default     : 0
+Expected    : N/A
+Description : Users can point and print to any machine (default).
+
+Policy      : Point and Print Restrictions &gt; ServerList
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+Value       : ServerList
+Data        : (null)
+Default     : (null)
+Expected    : N/A
+Description : A list of approved Point and Print servers is not defined (default).
+
+Policy      : Package Point and print - Only use Package Point and Print
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PackagePointAndPrint
+Value       : PackagePointAndPrintOnly
+Data        : (null)
+Default     : 0
+Expected    : N/A
+Description : Users will not be restricted to package-aware point and print only (default).
+
+Policy      : Package Point and print - Approved servers &gt; PackagePointAndPrintServerList
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PackagePointAndPrint
+Value       : PackagePointAndPrintServerList
+Data        : (null)
+Default     : 0
+Expected    : N/A
+Description : Package point and print will not be restricted to specific print servers (default).
+
+Policy      : Package Point and print - Approved servers &gt; PackagePointAndPrintServerList
+Key         : HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PackagePointAndPrint\ListOfServers
+Value       : N/A
+Data        : (null)
+Default     : (null)
+Expected    : N/A
+Description : A list of approved Package Point and Print servers is not defined (default).
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Misc - Known Ghost DLLs</td><td>Get information about services that are known to be prone to ghost DLL hijacking. Note that their exploitation requires the current user to have write permissions on at least one system-wide PATH folder.</td><td>None</td><td>
+
+Name           : cdpsgshims.dll
+Description    : Loaded by the Connected Devices Platform Service (CDPSvc) upon startup.
+RunAs          : NT AUTHORITY\LocalService
+RebootRequired : True
+Link           : https://nafiez.github.io/security/eop/2019/11/05/windows-service-host-process-eop.html
+
+Name           : WptsExtensions.dll
+Description    : Loaded by the Task Scheduler service (Schedule) upon startup.
+RunAs          : LocalSystem
+RebootRequired : True
+Link           : http://remoteawesomethoughts.blogspot.com/2019/05/windows-10-task-schedulerservice.html
+
+Name           : SprintCSP.dll
+Description    : Loaded by the Storage Service (StorSvc) when the RPC procedure &#39;SvcRebootToFlashingMode&#39; is invoked.
+RunAs          : LocalSystem
+RebootRequired : False
+Link           : https://github.com/blackarrowsec/redteam-research/tree/master/LPE%20via%20StorSvc
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Misc - Named Pipe Permissions</td><td>Get information about named pipes with a DACL that grants write access to the current user.</td><td>None</td><td>
+
+FullName          : \\.\pipe\eventlog
+Owner             : NT AUTHORITY\LOCAL SERVICE (S-1-5-19)
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead
+
+FullName          : \\.\pipe\vgauth-service
+Owner             : BUILTIN\Administrators (S-1-5-32-544)
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericWrite
+
+FullName          : \\.\pipe\ROUTER
+Owner             : NT AUTHORITY\SYSTEM (S-1-5-18)
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Misc - Process and Thread Permissions</td><td>Check whether the current user has any privileged access right on a Process or Thread they do not own.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Misc - System Startup History</td><td>Get information about the startup history. Note that this information might be useful if the exploitation of a service requires a reboot but the current user does not have the privileges to shut down the system.</td><td>None</td><td>
+Index Time                 
+----- ----                 
+    1 2026-07-18 - 10:04:43
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Misc - User Sessions</td><td>Get information about the currently logged-on users. Note that it might be possible to capture or relay the NTLM/Kerberos authentication of these users (RemotePotato0, KrbRelay).</td><td>None</td><td>
+SessionName UserName              Id        State
+----------- --------              --        -----
+Services                           0 Disconnected
+Console     DESKTOP-4V9TPK3\Sammy  1       Active
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Network - TCP Endpoints</td><td>Get information about all the TCP ports that are in a LISTEN state. Note that the associated process is also listed.</td><td>None</td><td>
+IP   Proto LocalAddress       State      PID Name                 
+--   ----- ------------       -----      --- ----                 
+IPv4 TCP   0.0.0.0:135        LISTENING  864 svchost              
+IPv4 TCP   0.0.0.0:445        LISTENING    4 System               
+IPv4 TCP   0.0.0.0:5040       LISTENING 5392 svchost              
+IPv4 TCP   0.0.0.0:7680       LISTENING 1652 svchost              
+IPv4 TCP   0.0.0.0:49664      LISTENING  512 wininit              
+IPv4 TCP   0.0.0.0:49665      LISTENING 1056 svchost              
+IPv4 TCP   0.0.0.0:49666      LISTENING 1380 svchost              
+IPv4 TCP   0.0.0.0:49667      LISTENING 2232 spoolsv              
+IPv4 TCP   0.0.0.0:49669      LISTENING  648 services             
+IPv4 TCP   0.0.0.0:49670      LISTENING  668 lsass                
+IPv4 TCP   172.16.220.129:139 LISTENING    4 System               
+IPv6 TCP   [::]:135           LISTENING  864 svchost              
+IPv6 TCP   [::]:445           LISTENING    4 System               
+IPv6 TCP   [::]:7680          LISTENING 1652 svchost              
+IPv6 TCP   [::]:49664         LISTENING  512 wininit              
+IPv6 TCP   [::]:49665         LISTENING 1056 svchost              
+IPv6 TCP   [::]:49666         LISTENING 1380 svchost              
+IPv6 TCP   [::]:49667         LISTENING 2232 spoolsv              
+IPv6 TCP   [::]:49669         LISTENING  648 services             
+IPv6 TCP   [::]:49670         LISTENING  668 lsass                
+IPv6 TCP   [::1]:42050        LISTENING 1448 OneDrive.Sync.Service
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Network - UDP Endpoints</td><td>Get information about all the UDP ports that are in a LISTEN state. Note that the associated process is also listed. DNS is filtered out to minimize the output.</td><td>None</td><td>
+IP   Proto LocalAddress                        State  PID Name   
+--   ----- ------------                        -----  --- ----   
+IPv4 UDP   0.0.0.0:5050                        N/A   5392 svchost
+IPv4 UDP   0.0.0.0:5353                        N/A   2028 svchost
+IPv4 UDP   0.0.0.0:5353                        N/A   5540 chrome 
+IPv4 UDP   0.0.0.0:5353                        N/A   5540 chrome 
+IPv4 UDP   0.0.0.0:5355                        N/A   2028 svchost
+IPv4 UDP   127.0.0.1:1900                      N/A   5284 svchost
+IPv4 UDP   127.0.0.1:54201                     N/A   5284 svchost
+IPv4 UDP   127.0.0.1:59366                     N/A   3012 svchost
+IPv4 UDP   172.16.220.129:137                  N/A      4 System 
+IPv4 UDP   172.16.220.129:138                  N/A      4 System 
+IPv4 UDP   172.16.220.129:1900                 N/A   5284 svchost
+IPv4 UDP   172.16.220.129:54200                N/A   5284 svchost
+IPv6 UDP   [::]:5353                           N/A   2028 svchost
+IPv6 UDP   [::]:5353                           N/A   5540 chrome 
+IPv6 UDP   [::]:5355                           N/A   2028 svchost
+IPv6 UDP   [::1]:1900                          N/A   5284 svchost
+IPv6 UDP   [::1]:54199                         N/A   5284 svchost
+IPv6 UDP   [fe80::c570:7f6f:c318:597a%5]:1900  N/A   5284 svchost
+IPv6 UDP   [fe80::c570:7f6f:c318:597a%5]:54198 N/A   5284 svchost
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Scheduled Tasks - Image File Permissions</td><td>Check whether the current user has any write permissions on a scheduled task&#39;s binary or its folder. Note that low-privileged users cannot list all the scheduled tasks.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Image File Permissions</td><td>Check whether the current user has any write permissions on a service&#39;s binary or its folder.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Known Vulnerable Kernel Drivers</td><td>Check whether known vulnerable kernel drivers are installed. It does so by computing the file hash of each driver and comparing the value against the list provided by loldrivers.io.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Named Kernel Device Permissions</td><td>Get information about named Kernel devices for which low-privileged users are granted write access. This can be helpful as a first step to identify exploitable drivers.</td><td>None</td><td>
+
+Name              : \Device\Afd
+ModifiablePath    : \\?\GLOBALROOT\Device\Afd
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\ahcache
+ModifiablePath    : \\?\GLOBALROOT\Device\ahcache
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\BitLocker
+ModifiablePath    : \\?\GLOBALROOT\Device\BitLocker
+IdentityReference : NT AUTHORITY\Authenticated Users (S-1-5-11)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericWrite
+
+Name              : \Device\CdRom0
+ModifiablePath    : \\?\GLOBALROOT\Device\CdRom0
+IdentityReference : NT AUTHORITY\INTERACTIVE (S-1-5-4)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, Delete, ReadControl, Synchronize, GenericRead, GenericWrite
+
+Name              : \Device\CNG
+ModifiablePath    : \\?\GLOBALROOT\Device\CNG
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\gpuenergydrv
+ModifiablePath    : \\?\GLOBALROOT\Device\gpuenergydrv
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\HarddiskVolume2
+ModifiablePath    : \\?\GLOBALROOT\Device\HarddiskVolume2
+IdentityReference : NT AUTHORITY\INTERACTIVE (S-1-5-4)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, Delete, ReadControl, Synchronize, GenericRead, GenericWrite
+
+Name              : \Device\hgfsInternal
+ModifiablePath    : \\?\GLOBALROOT\Device\hgfsInternal
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\KeyboardClass0
+ModifiablePath    : \\?\GLOBALROOT\Device\KeyboardClass0
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\KsecDD
+ModifiablePath    : \\?\GLOBALROOT\Device\KsecDD
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\LanmanDatagramReceiver
+ModifiablePath    : \\?\GLOBALROOT\Device\LanmanDatagramReceiver
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\Netbios
+ModifiablePath    : \\?\GLOBALROOT\Device\Netbios
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\PEAuth
+ModifiablePath    : \\?\GLOBALROOT\Device\PEAuth
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : AllAccess
+
+Name              : \Device\PointerClass0
+ModifiablePath    : \\?\GLOBALROOT\Device\PointerClass0
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\PointerClass1
+ModifiablePath    : \\?\GLOBALROOT\Device\PointerClass1
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\PointerClass2
+ModifiablePath    : \\?\GLOBALROOT\Device\PointerClass2
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\RdpBus
+ModifiablePath    : \\?\GLOBALROOT\Device\RdpBus
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\Spaceport
+ModifiablePath    : \\?\GLOBALROOT\Device\Spaceport
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\Tdx
+ModifiablePath    : \\?\GLOBALROOT\Device\Tdx
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\USBFDO-0
+ModifiablePath    : \\?\GLOBALROOT\Device\USBFDO-0
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\USBFDO-1
+ModifiablePath    : \\?\GLOBALROOT\Device\USBFDO-1
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericWrite
+
+Name              : \Device\USBFDO-2
+ModifiablePath    : \\?\GLOBALROOT\Device\USBFDO-2
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\USBPDO-0
+ModifiablePath    : \\?\GLOBALROOT\Device\USBPDO-0
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\USBPDO-1
+ModifiablePath    : \\?\GLOBALROOT\Device\USBPDO-1
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericWrite
+
+Name              : \Device\USBPDO-2
+ModifiablePath    : \\?\GLOBALROOT\Device\USBPDO-2
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericWrite
+
+Name              : \Device\USBPDO-3
+ModifiablePath    : \\?\GLOBALROOT\Device\USBPDO-3
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\vmci
+ModifiablePath    : \\?\GLOBALROOT\Device\vmci
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericWrite
+
+Name              : \Device\VMCIHostDev
+ModifiablePath    : \\?\GLOBALROOT\Device\VMCIHostDev
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\vmmemctl
+ModifiablePath    : \\?\GLOBALROOT\Device\vmmemctl
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\WindowsTrustedRT
+ModifiablePath    : \\?\GLOBALROOT\Device\WindowsTrustedRT
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+Name              : \Device\WMIDataDevice
+ModifiablePath    : \\?\GLOBALROOT\Device\WMIDataDevice
+IdentityReference : Everyone (S-1-1-0)
+Permissions       : ReadData, WriteData, AppendData, ReadExtendedAttributes, WriteExtendedAttributes, Execute, ReadAttributes, WriteAttributes, ReadControl, Synchronize, GenericRead, GenericExecute, GenericWrite
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Non-Default Kernel Drivers</td><td>Get information about third-party kernel drivers. It does so by parsing the driver&#39;s metadata and checking whether the publisher is Microsoft.</td><td>None</td><td>
+
+Name        : 3ware
+ImagePath   : System32\drivers\3ware.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : LSI 3ware RAID Controller
+Company     : LSI
+Description : LSI 3ware SCSI Storport Driver
+Version     : 5.01.00.051
+Copyright   : Copyright (c) 2011 LSI
+
+Name        : ADP80XX
+ImagePath   : System32\drivers\ADP80XX.SYS
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : PMC-Sierra HBA Controller
+Company     : PMC-Sierra
+Description : PMC-Sierra Storport  Driver For SPC8x6G SAS/SATA controller
+Version     : 1.3.0.10769 (NT.150223-1854)
+Copyright   : Copyright (C) PMC-Sierra 2001-2014
+
+Name        : amdsata
+ImagePath   : System32\drivers\amdsata.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : AHCI 1.3 Device Driver
+Company     : Advanced Micro Devices
+Description : AHCI 1.3 Device Driver
+Version     : 1.1.3.277 (NT.150223-1854)
+Copyright   : Copyright &#169; 2008-2015 AMD, Inc.
+
+Name        : amdsbs
+ImagePath   : System32\drivers\amdsbs.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : AMD Technology AHCI Compatible Controller
+Company     : AMD Technologies Inc.
+Description : AMD Technology AHCI Compatible Controller Driver for Windows - AMD64 platform
+Version     : 3.7.1540.43 (PART3.121207-1123)
+Copyright   : 2012 Advanced Micro Devices, Inc. All rights reserved.
+
+Name        : amdxata
+ImagePath   : System32\drivers\amdxata.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Storage Filter Driver
+Company     : Advanced Micro Devices
+Description : Storage Filter Driver
+Version     : 1.1.3.277 (NT.150223-1854)
+Copyright   : Copyright &#169; 2008-2015 AMD, Inc.
+
+Name        : arcsas
+ImagePath   : System32\drivers\arcsas.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Adaptec RAID Controller
+Company     : PMC-Sierra, Inc.
+Description : Adaptec SAS RAID WS03 Driver
+Version     : 7.5.0.32048 (NT.150223-1854)
+Copyright   : Copyright 2014 PMC-Sierra, Inc. All rights reserved.
+
+Name        : b06bdrv
+ImagePath   : System32\drivers\bxvbda.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : QLogic Gigabit Ethernet
+Company     : QLogic Corporation
+Description : QLogic Gigabit Ethernet VBD
+Version     : 7.12.31.105
+Copyright   : (c) COPYRIGHT 2014-2016 QLogic Corporation
+
+Name        : bcmfn2
+ImagePath   : \SystemRoot\System32\drivers\bcmfn2.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Windows (R) Win 7 DDK driver
+Company     : Windows (R) Win 7 DDK provider
+Description : BCM Function 2  Device Driver
+Version     : 6.3.9600.17336
+Copyright   : &#169; Broadcom Corporation. All rights reserved.
+
+Name        : cht4iscsi
+ImagePath   : System32\drivers\cht4sx64.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Chelsio Communications iSCSI Controller
+Company     : Chelsio Communications
+Description : Chelsio iSCSI VMiniport Driver
+Version     : 6.9.12.400
+Copyright   : Copyright &#169; 2016 Chelsio Communications. All rights reserved.
+
+Name        : cht4vbd
+ImagePath   : \SystemRoot\System32\drivers\cht4vx64.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Chelsio Communications Unified Network I/O Controller
+Company     : Chelsio Communications
+Description : Virtual Bus Driver for Chelsio &#174; T5/T6 Chipset
+Version     : 6.9.12.400
+Copyright   : Copyright &#169; 2016 Chelsio Communications. All rights reserved.
+
+Name        : e1iexpress
+ImagePath   : \SystemRoot\System32\drivers\e1i63x64.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Running
+ProductName : Intel(R) Gigabit Adapter
+Company     : Intel Corporation
+Description : Intel(R) Gigabit Adapter NDIS 6.x driver
+Version     : 12.15.22.6
+Copyright   : Copyright(C) 2013, Intel Corporation.  All rights reserved.
+
+Name        : ebdrv
+ImagePath   : System32\drivers\evbda.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : QLogic 10 GigE
+Company     : QLogic Corporation
+Description : QLogic 10 GigE VBD
+Version     : 7.13.65.105
+Copyright   : (c) COPYRIGHT 2014-2016 QLogic Corporation
+
+Name        : HpSAMD
+ImagePath   : System32\drivers\HpSAMD.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Smart Array SAS/SATA Controller Media Driver
+Company     : Hewlett-Packard Company
+Description : Smart Array SAS/SATA Controller Media Driver
+Version     : 8.0.4.0 Build 1 Media Driver (x86-64) (PART_L3.130128-0938)
+Copyright   : Copyright (c) 2004-2011 Hewlett-Packard Development Company, L.P. ALL RIGHTS RESERVED.
+
+Name        : iagpio
+ImagePath   : \SystemRoot\System32\drivers\iagpio.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO GPIO Controller Driver
+Company     : Intel(R) Corporation
+Description : Intel(R) Serial IO GPIO Controller Driver
+Version     : 1.1.1.0
+Copyright   : Copyright (C) 2013.
+
+Name        : iai2c
+ImagePath   : \SystemRoot\System32\drivers\iai2c.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO I2C Driver
+Company     : Intel(R) Corporation
+Description : Intel(R) Serial IO I2C Driver
+Version     : 1.1.1.0
+Copyright   : Copyright (C) 2013.
+
+Name        : iaLPSS2i_GPIO2
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_GPIO2.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO GPIO Driver v2
+Version     : 30.100.1816.3
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSS2i_GPIO2_BXT_P
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_GPIO2_BXT_P.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO GPIO Driver v2
+Version     : 30.100.1816.1
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSS2i_GPIO2_CNL
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_GPIO2_CNL.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO GPIO Driver v2
+Version     : 30.100.1816.3
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSS2i_GPIO2_GLK
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_GPIO2_GLK.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO GPIO Driver v2
+Version     : 30.100.1820.1
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSS2i_I2C
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_I2C.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO I2C Driver v2
+Version     : 30.100.1816.3
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSS2i_I2C_BXT_P
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_I2C_BXT_P.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO I2C Driver v2
+Version     : 30.100.1816.1
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSS2i_I2C_CNL
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_I2C_CNL.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO I2C Driver v2
+Version     : 30.100.1816.3
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSS2i_I2C_GLK
+ImagePath   : \SystemRoot\System32\drivers\iaLPSS2i_I2C_GLK.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO I2C Driver v2
+Version     : 30.100.1820.1
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSSi_GPIO
+ImagePath   : \SystemRoot\System32\drivers\iaLPSSi_GPIO.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO GPIO Controller Driver
+Version     : 1.1.250.0
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaLPSSi_I2C
+ImagePath   : \SystemRoot\System32\drivers\iaLPSSi_I2C.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : Intel(R) Serial IO Driver
+Company     : Intel Corporation
+Description : Intel(R) Serial IO I2C Controller Driver
+Version     : 1.1.253.0
+Copyright   : Copyright &#169; 2015, Intel Corporation.
+
+Name        : iaStorAVC
+ImagePath   : System32\drivers\iaStorAVC.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Intel(R) Rapid Storage Technology driver (inbox)
+Company     : Intel Corporation
+Description : Intel(R) Rapid Storage Technology driver (inbox) - x64
+Version     : 15.44.0.1010
+Copyright   : Copyright (C), Intel Corporation. All rights reserved.
+
+Name        : iaStorV
+ImagePath   : System32\drivers\iaStorV.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Intel Matrix Storage Manager driver
+Company     : Intel Corporation
+Description : Intel Matrix Storage Manager driver - x64
+Version     : 8.6.2.1019
+Copyright   : Copyright(C) Intel Corporation 1994-2008
+
+Name        : ibbus
+ImagePath   : \SystemRoot\System32\drivers\ibbus.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : OpenFabrics Windows
+Company     : Mellanox
+Description : InfiniBand Fabric Bus Driver
+Version     : 5.50.14643
+Copyright   : Copyright&#169; 2009 Mellanox Technologies Ltd
+
+Name        : ItSas35i
+ImagePath   : System32\drivers\ItSas35i.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Windows (R) Win 7 DDK driver
+Company     : Avago Technologies
+Description : Avago SAS Gen3.5 Driver (StorPort)
+Version     : 2.60.59.80
+Copyright   : Copyright &#169; Avago Technologies 2015
+
+Name        : LSI_SAS
+ImagePath   : System32\drivers\lsi_sas.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : LSI Fusion-MPT SAS Driver (StorPort)
+Company     : LSI Corporation
+Description : LSI Fusion-MPT SAS Driver (StorPort)
+Version     : 1.34.03.83 (NT.150223-1854)
+Copyright   : Copyright &#169; LSI Corporation 2010
+
+Name        : LSI_SAS2i
+ImagePath   : System32\drivers\lsi_sas2i.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Windows (R) Win 7 DDK driver
+Company     : LSI Corporation
+Description : LSI SAS Gen2 Driver (StorPort)
+Version     : 2.00.79.82
+Copyright   : Copyright &#169; LSI Corporation 2012
+
+Name        : LSI_SAS3i
+ImagePath   : System32\drivers\lsi_sas3i.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Windows (R) Win 7 DDK driver
+Company     : Avago Technologies
+Description : Avago SAS Gen3 Driver (StorPort)
+Version     : 2.51.24.80
+Copyright   : Copyright &#169; Avago Technologies 2015
+
+Name        : LSI_SSS
+ImagePath   : System32\drivers\lsi_sss.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : LSI SSS PCIe/Flash Driver (StorPort)
+Company     : LSI Corporation
+Description : LSI SSS PCIe/Flash Driver (StorPort)
+Version     : 2.10.61.81 (PART_L3.130128-0938)
+Copyright   : Copyright &#169; LSI Corporation 2012
+
+Name        : megasas
+ImagePath   : System32\drivers\megasas.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : MEGASAS RAID Controller Driver for Windows
+Company     : Avago Technologies
+Description : MEGASAS RAID Controller Driver for Windows
+Version     : 6.706.06.00 (NT.150223-1854)
+Copyright   : Copyright &#169; Avago Technologies2013
+
+Name        : megasas2i
+ImagePath   : System32\drivers\MegaSas2i.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : MEGASAS RAID Controller Driver for Windows
+Company     : Avago Technologies
+Description : MEGASAS RAID Controller Driver for Windows
+Version     : 6.714.05.00
+Copyright   : Copyright &#169; Avago Technologies2017
+
+Name        : megasas35i
+ImagePath   : System32\drivers\megasas35i.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : MEGASAS RAID Controller Driver for Windows
+Company     : Avago Technologies
+Description : MEGASAS RAID Controller Driver for Windows
+Version     : 7.705.08.00
+Copyright   : Copyright &#169; Avago Technologies2017
+
+Name        : megasr
+ImagePath   : System32\drivers\megasr.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : MegaRAID Software RAID
+Company     : LSI Corporation, Inc.
+Description : LSI MegaRAID Software RAID Driver
+Version     : 15.02.2013.0129
+Copyright   : Copyright (C) 2007 LSI Corporation.
+
+Name        : mlx4_bus
+ImagePath   : \SystemRoot\System32\drivers\mlx4_bus.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : OpenFabrics Windows
+Company     : Mellanox
+Description : MLX4 Bus Driver
+Version     : 5.50.14643
+Copyright   : Copyright&#169; 2009 Mellanox Technologies Ltd
+
+Name        : mvumis
+ImagePath   : System32\drivers\mvumis.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Marvell Flash Controller
+Company     : Marvell Semiconductor, Inc.
+Description : Marvell Flash Controller Driver
+Version     : 1.0.5.1016  (PART_L3.131021-1012)
+Copyright   : Copyright (c) Marvell Semiconductor, Inc.
+
+Name        : ndfltr
+ImagePath   : \SystemRoot\System32\drivers\ndfltr.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : OpenFabrics Windows
+Company     : Mellanox
+Description : NetworkDirect Support Filter Driver
+Version     : 5.50.14643
+Copyright   : Copyright&#169; 2009 Mellanox Technologies Ltd
+
+Name        : nvraid
+ImagePath   : System32\drivers\nvraid.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : NVIDIA nForce(TM) RAID Driver
+Company     : NVIDIA Corporation
+Description : NVIDIA&#174; nForce(TM) RAID Driver
+Version     : 10.6.0.23 (PART_L3.131021-1012)
+Copyright   : Copyright(C) 2001-2011 NVIDIA Corporation
+
+Name        : nvstor
+ImagePath   : System32\drivers\nvstor.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : NVIDIA nForce(TM) SATA Driver
+Company     : NVIDIA Corporation
+Description : NVIDIA&#174; nForce(TM) Sata Performance Driver
+Version     : 10.6.0.23 (PART_L3.131021-1012)
+Copyright   : Copyright(C) 2001-2011 NVIDIA Corporation
+
+Name        : percsas2i
+ImagePath   : System32\drivers\percsas2i.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : MEGASAS RAID Controller Driver for Windows
+Company     : Avago Technologies
+Description : MEGASAS RAID Controller Driver for Windows
+Version     : 6.805.03.00 (rs1_onecore_stacksp_sfs4(paudina).160302-1205)
+Copyright   : Copyright &#169; Avago Technologies2013
+
+Name        : percsas3i
+ImagePath   : System32\drivers\percsas3i.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : MEGASAS RAID Controller Driver for Windows
+Company     : Avago Technologies
+Description : MEGASAS RAID Controller Driver for Windows
+Version     : 6.604.06.00
+Copyright   : Copyright &#169; Avago Technologies2013
+
+Name        : SiSRaid2
+ImagePath   : System32\drivers\SiSRaid2.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Microsoft&#174; Windows&#174; Operating System
+Company     : Silicon Integrated Systems Corp.
+Description : SiS RAID Stor Miniport Driver
+Version     : 2.60.01 (NT.070926-1510)
+Copyright   : Copyright (c) SiS Corp. 2000-2010
+
+Name        : SiSRaid4
+ImagePath   : System32\drivers\sisraid4.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Microsoft&#174; Windows&#174; Operating System
+Company     : Silicon Integrated Systems
+Description : SiS AHCI Stor-Miniport Driver
+Version     : 3.60.03 (NT.070926-1510)
+Copyright   : Copyright (c) SiS Corp. 2007-2013
+
+Name        : SmartSAMD
+ImagePath   : System32\drivers\SmartSAMD.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : SmartRAID, SmartHBA PQI Storport Driver
+Company     : Microsemi Corportation
+Description : Storport Miniport Driver for SmartRAID/SmartHBA Controllers
+Version     : 1.50.0.0
+Copyright   : Copyright &#169; 2015-2017 Microsemi Corporation. All rights reserved.
+
+Name        : stexstor
+ImagePath   : System32\drivers\stexstor.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : Promise&#174; SuperTrak EX Series
+Company     : Promise Technology, Inc.
+Description : Promise SuperTrak EX Series Driver for Windows x64
+Version     : 5.1.0000.10 (PART.121116-1330)
+Copyright   : &#169; Promise Technology, Inc. All rights reserved.
+
+Name        : vm3dmp
+ImagePath   : \SystemRoot\system32\DRIVERS\vm3dmp.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware SVGA 3D
+Company     : VMware, Inc.
+Description : VMware SVGA 3D Miniport
+Version     : 9.17.07.0002
+Copyright   : Copyright (C) 1998-2023 VMware, Inc.
+
+Name        : vm3dmp-debug
+ImagePath   : \SystemRoot\system32\DRIVERS\vm3dmp-debug.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : VMware SVGA 3D
+Company     : VMware, Inc.
+Description : VMware SVGA 3D Miniport
+Version     : 9.17.07.0002
+Copyright   : Copyright (C) 1998-2023 VMware, Inc.
+
+Name        : vm3dmp-stats
+ImagePath   : \SystemRoot\system32\DRIVERS\vm3dmp-stats.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : VMware SVGA 3D
+Company     : VMware, Inc.
+Description : VMware SVGA 3D Miniport
+Version     : 9.17.07.0002
+Copyright   : Copyright (C) 1998-2023 VMware, Inc.
+
+Name        : vm3dmp_loader
+ImagePath   : \SystemRoot\system32\DRIVERS\vm3dmp_loader.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware SVGA 3D
+Company     : VMware, Inc.
+Description : VMware SVGA 3D Miniport Loader
+Version     : 9.17.07.0002
+Copyright   : Copyright (C) 1998-2023 VMware, Inc.
+
+Name        : vmci
+ImagePath   : System32\drivers\vmci.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware PCI VMCI Bus Device
+Company     : VMware, Inc.
+Description : VMware PCI VMCI Bus Device
+Version     : 9.8.18.0
+Copyright   : Copyright &#169; 1998-2021 VMware, Inc.
+
+Name        : vmhgfs
+ImagePath   : system32\DRIVERS\vmhgfs.sys
+StartMode   : Manual
+Type        : FileSystemDriver
+Status      : Running
+ProductName : VMware HGFS File System Driver
+Company     : VMware, Inc.
+Description : VMware HGFS File System Driver
+Version     : 11.0.44.0
+Copyright   : Copyright &#169; 1998-2021 VMware, Inc.
+
+Name        : VMMemCtl
+ImagePath   : \SystemRoot\system32\DRIVERS\vmmemctl.sys
+StartMode   : Automatic
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware server memory controller
+Company     : VMware, Inc.
+Description : VMware server memory controller
+Version     : 7.5.7.0
+Copyright   : Copyright &#169; 1998-2021 VMware, Inc.
+
+Name        : vmmouse
+ImagePath   : \SystemRoot\System32\drivers\vmmouse.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware Pointing PS/2 Device Driver
+Company     : VMware, Inc.
+Description : VMware Pointing PS/2 Device Driver
+Version     : 12.5.12.0
+Copyright   : Copyright &#169; 1998-2021 VMware, Inc.
+
+Name        : vmrawdsk
+ImagePath   : \SystemRoot\system32\DRIVERS\vmrawdsk.sys
+StartMode   : System
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware Raw Disk Helper Driver
+Company     : VMware, Inc.
+Description : VMware Raw Disk Helper Driver
+Version     : 1.1.7.0
+Copyright   : Copyright &#169; 1998-2021 VMware, Inc.
+
+Name        : vmusbmouse
+ImagePath   : \SystemRoot\System32\drivers\vmusbmouse.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware Pointing USB Device Driver
+Company     : VMware, Inc.
+Description : VMware Pointing USB Device Driver
+Version     : 12.5.12.0
+Copyright   : Copyright &#169; 1998-2021 VMware, Inc.
+
+Name        : vsmraid
+ImagePath   : System32\drivers\vsmraid.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : VIA RAID driver
+Company     : VIA Technologies Inc.,Ltd
+Description : VIA RAID DRIVER FOR AMD-X86-64
+Version     : 7.0.9600,6352
+Copyright   : Copyright (C) VIA Technologies 1992-2007
+
+Name        : vsock
+ImagePath   : system32\DRIVERS\vsock.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : VMware vSockets Service
+Company     : VMware, Inc.
+Description : VMware vSockets Service
+Version     : 9.8.19.0
+Copyright   : Copyright &#169; 1998-2021 VMware, Inc.
+
+Name        : VSTXRAID
+ImagePath   : System32\drivers\vstxraid.sys
+StartMode   : Boot
+Type        : KernelDriver
+Status      : Running
+ProductName : VIA StorX RAID Controller Driver
+Company     : VIA Corporation
+Description : VIA StorX RAID Controller Driver
+Version     : 8.0.9200.8110
+Copyright   : Copyright (C) 2008 VIA Corporation
+
+Name        : WinMad
+ImagePath   : \SystemRoot\System32\drivers\winmad.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : OpenFabrics Windows
+Company     : Mellanox
+Description : Kernel WinMad
+Version     : 5.50.14643
+Copyright   : Copyright&#169; 2009 Mellanox Technologies Ltd
+
+Name        : WinVerbs
+ImagePath   : \SystemRoot\System32\drivers\winverbs.sys
+StartMode   : Manual
+Type        : KernelDriver
+Status      : Stopped
+ProductName : OpenFabrics Windows
+Company     : Mellanox
+Description : Kernel WinVerbs
+Version     : 5.50.14643
+Copyright   : Copyright&#169; 2009 Mellanox Technologies Ltd
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Non-Default Services</td><td>Get information about third-party services. It does so by parsing the target executable&#39;s metadata and checking whether the publisher is Microsoft.</td><td>None</td><td>
+
+Name         : GoogleChromeElevationService
+DisplayName  : Google Chrome Elevation Service (GoogleChromeElevationService)
+ImagePath    : &quot;C:\Program Files\Google\Chrome\Application\133.0.6943.59\elevation_service.exe&quot;
+User         : LocalSystem
+StartMode    : Manual
+UserCanStart : False
+UserCanStop  : False
+
+Name         : GoogleUpdaterInternalService152.0.7933.0
+DisplayName  : Google Updater Internal Service (GoogleUpdaterInternalService152.0.7933.0)
+ImagePath    : &quot;C:\Program Files (x86)\Google\GoogleUpdater\152.0.7933.0\updater.exe&quot; --system --windows-service --service=update-internal
+User         : LocalSystem
+StartMode    : Automatic
+UserCanStart : False
+UserCanStop  : False
+
+Name         : GoogleUpdaterService152.0.7933.0
+DisplayName  : Google Updater Service (GoogleUpdaterService152.0.7933.0)
+ImagePath    : &quot;C:\Program Files (x86)\Google\GoogleUpdater\152.0.7933.0\updater.exe&quot; --system --windows-service --service=update
+User         : LocalSystem
+StartMode    : Automatic
+UserCanStart : False
+UserCanStop  : False
+
+Name         : ssh-agent
+DisplayName  : OpenSSH Authentication Agent
+ImagePath    : C:\Windows\System32\OpenSSH\ssh-agent.exe
+User         : LocalSystem
+StartMode    : Disabled
+UserCanStart : True
+UserCanStop  : False
+
+Name         : VGAuthService
+DisplayName  : VMware Alias Manager and Ticket Service
+ImagePath    : &quot;C:\Program Files\VMware\VMware Tools\VMware VGAuth\VGAuthService.exe&quot;
+User         : LocalSystem
+StartMode    : Automatic
+UserCanStart : False
+UserCanStop  : False
+
+Name         : vm3dservice
+DisplayName  : @oem8.inf,%VM3DSERVICE_DISPLAYNAME%;VMware SVGA Helper Service
+ImagePath    : C:\Windows\system32\vm3dservice.exe
+User         : LocalSystem
+StartMode    : Automatic
+UserCanStart : False
+UserCanStop  : False
+
+Name         : VMTools
+DisplayName  : VMware Tools
+ImagePath    : &quot;C:\Program Files\VMware\VMware Tools\vmtoolsd.exe&quot;
+User         : LocalSystem
+StartMode    : Automatic
+UserCanStart : False
+UserCanStop  : False
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Permissions</td><td>Check whether the current user has any write permissions on a service through the Service Control Manager (SCM).</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Registry Permissions</td><td>Check whether the current user has any write permissions on the settings of a service in the registry.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Registry Permissions (Extended)</td><td>Check whether the current user has any write permissions on the extended settings of a service in the registry. This may not necessarily result in a privilege escalation. Further analysis is required.</td><td>Medium</td><td>
+
+Name              : embeddedmode
+StartMode         : Manual
+ImagePath         : C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+User              : LocalSystem
+ModifiablePath    : HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\embeddedmode\Parameters
+IdentityReference : NT AUTHORITY\Authenticated Users (S-1-5-11)
+Permissions       : QueryValue, CreateSubKey, EnumerateSubKeys, Notify, ReadControl, GenericRead
+Status            : Stopped
+UserCanStart      : True
+UserCanStop       : False
+
+Name              : embeddedmode
+StartMode         : Manual
+ImagePath         : C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+User              : LocalSystem
+ModifiablePath    : HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\embeddedmode\Parameters
+IdentityReference : NT AUTHORITY\INTERACTIVE (S-1-5-4)
+Permissions       : QueryValue, CreateSubKey, EnumerateSubKeys, ReadControl
+Status            : Stopped
+UserCanStart      : True
+UserCanStop       : False
+
+Name              : vds
+StartMode         : Manual
+ImagePath         : C:\Windows\System32\vds.exe
+User              : LocalSystem
+ModifiablePath    : HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vds\Alignment
+IdentityReference : NT AUTHORITY\Authenticated Users (S-1-5-11)
+Permissions       : QueryValue, CreateSubKey, EnumerateSubKeys, ReadControl
+Status            : Stopped
+UserCanStart      : False
+UserCanStop       : False
+
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Service Control Manager Permissions</td><td>Check whether the current user has any write permissions on the Service Control Manager (SCM).</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Services - Unquoted Paths</td><td>Check whether there are services configured with an exploitable unquoted path that contains spaces.</td><td>None</td><td></td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Updates - Last Windows Update Date</td><td>Get information about the latest Windows update. Note that this check might be unreliable.</td><td>None</td><td>
+Time                  TimeRaw             
+----                  -------             
+2026-07-18 - 08:05:07 7/18/2026 8:05:07 AM
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>Updates - Update History</td><td>Check whether a Windows security update was installed within the last 31 days.</td><td>Medium</td><td>
+HotFixID  Description InstalledBy         InstalledOn           
+--------  ----------- -----------         -----------           
+KB4580422 Update      NT AUTHORITY\SYSTEM 2/11/2025 12:00:00 AM 
+KB4499918 Update      NT AUTHORITY\SYSTEM 2/11/2025 12:00:00 AM 
+KB4486153 Update      NT AUTHORITY\SYSTEM 2/11/2025 12:00:00 AM 
+KB4465065 Update      NT AUTHORITY\SYSTEM 2/11/2025 12:00:00 AM 
+KB4464455 Update                          10/29/2018 12:00:00 AM
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>User - Privileges</td><td>Check whether the current user is granted privileges that can be leveraged for local privilege escalation.</td><td>None</td><td>
+Name                          State    Description                          Exploitable
+----                          -----    -----------                          -----------
+SeShutdownPrivilege           Disabled Shut down the system                       False
+SeChangeNotifyPrivilege       Enabled  Bypass traverse checking                   False
+SeUndockPrivilege             Disabled Remove computer from docking station       False
+SeIncreaseWorkingSetPrivilege Disabled Increase a process working set             False
+SeTimeZonePrivilege           Disabled Change the time zone                       False
+
+
+</td></tr> <tr><td>TA0004 - Privilege Escalation</td><td>User - Privileges (GPO)</td><td>Check whether the current user is granted privileges, through a group policy, that can be leveraged for local privilege escalation.</td><td>None</td><td></td></tr> <tr><td>TA0005 - Defense Evasion</td><td>Configuration - MDE State and Settings</td><td>Get information about Microsoft Defender for Endpoint state and configuration.</td><td>None</td><td>
+
+OnboardingState                        : 
+OrganizationId                         : 
+MsSenseDllVersion                      : 
+ConfigurationVersion                   : 
+RealtimeMonitoringEnabled              : True
+BehaviorMonitoringEnabled              : True
+TamperProtectionEnabled                : False
+PUAProtectionEnabled                   : False
+NetworkProtectionEnabled               : False
+ArchiveScanningEnabled                 : True
+EmailScanningEnabled                   : False
+MappedNetworkDrivesScanningEnabled     : False
+RemovableDrivesScanningEnabled         : False
+DownloadsAndAttachmentsScanningEnabled : True
+NetworkFilesScanningEnabled            : True
+ScriptScanningEnabled                  : True
+
+
+
+</td></tr> <tr><td>TA0005 - Defense Evasion</td><td>Configuration - Windows Defender Exclusions</td><td>Get information about the exclusions configured in Microsoft Defender.</td><td>None</td><td>
+Source   Type Value
+------   ---- -----
+Registry Path C:\  
+EventLog Path C:\  
+
+
+</td></tr> <tr><td>TA0005 - Defense Evasion</td><td>Hardening - AppLocker Policy</td><td>Check whether AppLocker rules can be exploited, in the context of the current user, to execute arbitrary code.</td><td>None</td><td></td></tr> <tr><td>TA0005 - Defense Evasion</td><td>Hardening - Attack Surface Reduction (ASR)</td><td>Get information about configured Windows Defender Exploit Guard Attack Surface Reduction (ASR) rules.</td><td>None</td><td></td></tr> <tr><td>TA0005 - Defense Evasion</td><td>Misc - AMSI Providers</td><td>Get information about AMSI providers registered by antimalware software.</td><td>None</td><td>
+
+Id              : 2781761e-28e0-4109-99fe-b9d127c57afe
+Name            : Windows Defender IOfficeAntiVirus implementation
+RegPath         : HKLM\SOFTWARE\Classes\CLSID\{2781761e-28e0-4109-99fe-b9d127c57afe}
+HandlerType     : InprocServer32
+HandlerRegPath  : HKLM\SOFTWARE\Classes\CLSID\{2781761e-28e0-4109-99fe-b9d127c57afe}\InprocServer32
+HandlerDataType : FilePath
+HandlerData     : &quot;%ProgramData%\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpOav.dll&quot;
+
+
+
+</td></tr> <tr><td>TA0005 - Defense Evasion</td><td>Misc - Endpoint Protection Software</td><td>Get information about the installed security products (AV, EDR). Note that this check follows a keyword-based approach and thus might not be completely reliable.</td><td>None</td><td>
+ProductName      Source                Pattern                                                                                                   
+-----------      ------                -------                                                                                                   
+AMSI             Loaded DLL            OriginalFilename=amsi.dll                                                                                 
+AMSI             Loaded DLL            InternalName=amsi.dll                                                                                     
+AMSI             Loaded DLL            FileName=C:\Windows\SYSTEM32\amsi.dll                                                                     
+Windows Defender Installed application Name=Windows Defender                                                                                     
+Windows Defender Installed application Name=Windows Defender                                                                                     
+Windows Defender Installed application Name=Windows Defender Advanced Threat Protection                                                          
+Windows Defender Loaded DLL            FileName=C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MPCLIENT.DLL                
+Windows Defender Loaded DLL            FileName=C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpOav.dll                   
+Windows Defender Running process       Name=SecurityHealthService                                                                                
+Windows Defender Running process       Description=Windows Defender SmartScreen                                                                  
+Windows Defender Running process       ProcessName=MpDefenderCoreService                                                                         
+Windows Defender Running process       ProcessName=SecurityHealthService                                                                         
+Windows Defender Running process       ProcessName=MsMpEng                                                                                       
+Windows Defender Running process       Name=MpDefenderCoreService                                                                                
+Windows Defender Running process       Name=MsMpEng                                                                                              
+Windows Defender Running process       Name=NisSrv                                                                                               
+Windows Defender Running process       ProcessName=NisSrv                                                                                        
+Windows Defender Service               DisplayName=@C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpAsDesc.dll,-370       
+Windows Defender Service               DisplayName=@C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpAsDesc.dll,-330       
+Windows Defender Service               DisplayName=@C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpAsDesc.dll,-390       
+Windows Defender Service               DisplayName=@C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpAsDesc.dll,-320       
+Windows Defender Service               ImagePath=&quot;C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MsMpEng.exe&quot;              
+Windows Defender Service               DisplayName=@C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpAsDesc.dll,-310       
+Windows Defender Service               ImagePath=&quot;C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\NisSrv.exe&quot;               
+Windows Defender Service               DisplayName=@C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpAsDesc.dll,-430       
+Windows Defender Service               Name=SecurityHealthService                                                                                
+Windows Defender Service               ImagePath=&quot;C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpDefenderCoreService.exe&quot;
+Windows Defender Service               DisplayName=@C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26060.3008-0\MpAsDesc.dll,-245       
+Windows Defender Service               ImagePath=C:\Windows\system32\SecurityHealthService.exe                                                   
+Windows Defender Service               ImagePath=&quot;C:\Program Files\Windows Defender Advanced Threat Protection\MsSense.exe&quot;                      
+Windows Defender Service               DisplayName=@C:\Program Files\Windows Defender Advanced Threat Protection\MsSense.exe,-1001               
+Windows Defender Service               RegistryPath=HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService                                 
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Configuration - Credential Delegation</td><td>Check whether Credential Delegation is enabled. If so, passwords are very likely to be stored in clear-text in memory, unless another setting prevents that. Note that LSA Protection is not sufficient to protect credentials in this case.</td><td>None</td><td>
+
+Policy              : Allow delegating default credentials with NTLM-only server authentication
+Setting             : AllowDefCredentialsWhenNTLMOnly
+Enabled             : False
+ConcatenateDefaults : False
+Services            : (null)
+
+Policy              : Allow delegating default credentials
+Setting             : AllowDefaultCredentials
+Enabled             : False
+ConcatenateDefaults : False
+Services            : (null)
+
+Policy              : Deny delegating default credentials
+Setting             : DenyDefaultCredentials
+Enabled             : False
+ConcatenateDefaults : False
+Services            : (null)
+
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - DPAPI Credential Files</td><td>Get information about the current user&#39;s DPAPI credential files.</td><td>None</td><td>
+
+FullName       : C:\Users\Sammy\AppData\Local\Microsoft\Credentials\DFBE70A7E5CC19A398EBF1B96859CE5D
+Description    : Local Credential Data
+MasterKey      : d6373f68-b399-4ba5-8c90-c33fb1b48b78
+LastAccessTime : 2026-07-18 - 10:21:36
+LastWriteTime  : 2026-07-18 - 10:21:36
+Size           : 11120
+
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - DPAPI Master Keys</td><td>Get information about the current user&#39;s DPAPI master keys.</td><td>None</td><td>
+
+FullName       : C:\Users\Sammy\AppData\Roaming\Microsoft\Protect\S-1-5-21-3687015499-3071869482-3054830844-1000\59a6a932-df01-45e8-b071-bedcd04dd8a8
+Id             : 59a6a932-df01-45e8-b071-bedcd04dd8a8
+LastAccessTime : 2026-07-18 - 10:21:33
+LastWriteTime  : 2025-01-15 - 11:38:10
+
+FullName       : C:\Users\Sammy\AppData\Roaming\Microsoft\Protect\S-1-5-21-3687015499-3071869482-3054830844-1000\8f606b54-1541-429e-ab24-617f0458e4ff
+Id             : 8f606b54-1541-429e-ab24-617f0458e4ff
+LastAccessTime : 2026-07-18 - 10:22:12
+LastWriteTime  : 2024-08-19 - 16:35:46
+
+FullName       : C:\Users\Sammy\AppData\Roaming\Microsoft\Protect\S-1-5-21-3687015499-3071869482-3054830844-1000\d6373f68-b399-4ba5-8c90-c33fb1b48b78
+Id             : d6373f68-b399-4ba5-8c90-c33fb1b48b78
+LastAccessTime : 2026-07-18 - 10:21:34
+LastWriteTime  : 2026-07-18 - 10:21:34
+
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - Group Policy Preferences (GPP)</td><td>Check whether there are cached Group Policy Preference (GPP) files that contain clear-text passwords.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - Hive File Permissions</td><td>Check whether the current user has read permissions on the SAM/SYSTEM/SECURITY hive files, either in the system folder or in volume shadow copies (CVE-2021-36934 - HiveNightmare).</td><td>Medium</td><td>
+
+Path              : C:\Windows\System32\config\SAM
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+Path              : C:\Windows\System32\config\SYSTEM
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+Path              : C:\Windows\System32\config\SECURITY
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+Path              : C:\Windows\System32\config\SOFTWARE
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+Path              : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\Windows\System32\config\SAM
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+Path              : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\Windows\System32\config\SYSTEM
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+Path              : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\Windows\System32\config\SECURITY
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+Path              : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\Windows\System32\config\SOFTWARE
+IdentityReference : BUILTIN\Users (S-1-5-32-545)
+Permissions       : ReadData, ReadExtendedAttributes, Execute, ReadAttributes, ReadControl, Synchronize, GenericRead, GenericExecute
+
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - Personal Certificates</td><td>Get information about machine and user personal certificates. Those certificates can be found in the registry and on the filesystem in each user&#39;s home folder.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - PowerShell History</td><td>Check whether the current user&#39;s PowerShell history contains any clear-text credentials. Note that this check follows a keyword-based approach and thus might not be completely reliable.</td><td>None</td><td>
+
+Path          : C:\Users\Sammy\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+CreationTime  : 7/18/2026 10:22:21 AM
+LastWriteTime : 7/18/2026 10:56:13 AM
+Lines         : 3
+Matches       : 0
+
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - SCCM Cache Folder</td><td>Check whether the SCCM cache folders contain files with potentially hard coded credentials, or secrets, using basic keywords such as &#39;password&#39;, or &#39;secret&#39;.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - SCCM Network Access Account (NAA)</td><td>Check whether SCCM NAA credentials are stored in the WMI repository. If so, the username and password DPAPI blobs are returned, but can only be decrypted using the SYSTEM&#39;s DPAPI user key.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - SCOM Run As Account</td><td>Check whether the event logs contain traces of SCOM Run As accounts being used locally. If so, the clear-text credentials of those accounts can be extracted from the registry with administrator privileges.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - Symantec Account Connectivity </td><td>Check whether a Symantec Management Agent (SMA) is installed and whether Account Connectivity Credentials (ACCs) are stored locally.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - Unattend Files</td><td>Check whether there are any &#39;unattend&#39; files and whether they contain clear-text credentials.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - VNC Server Password</td><td>Check whether a well-known VNC server (RealVNC, TigerVNC, TightVNC, UltraVNC) is installed. If so, it attempts to read and decrypt the encrypted password. Note that this might require administrator privileges.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Credentials - WinLogon</td><td>Check whether the &#39;WinLogon&#39; registry key contains clear-text credentials. Note that entries with an empty password field are filtered out.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Hardening - Credential Guard</td><td>Check whether Credential Guard is supported and enabled. Note that when Credential Guard is enabled, credentials are stored in an isolated process (&#39;LsaIso.exe&#39;) that cannot be accessed, even if the kernel is compromised.</td><td>Low</td><td>
+
+LsaCfgFlagsPolicyKey       : HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
+LsaCfgFlagsPolicyValue     : LsaCfgFlags
+LsaCfgFlagsPolicyData      : (null)
+LsaCfgFlagsKey             : HKLM\SYSTEM\CurrentControlSet\Control\LSA
+LsaCfgFlagsValue           : LsaCfgFlags
+LsaCfgFlagsData            : (null)
+LsaCfgFlagsDescription     : Credential Guard is not configured.
+CredentialGuardConfigured  : False
+CredentialGuardRunning     : False
+CredentialGuardDescription : Credential Guard is not configured. Credential Guard is not running.
+
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Hardening - LSA Protection</td><td>Check whether LSA protection is enabled. Note that when LSA protection is enabled, &#39;lsass.exe&#39; runs as a Protected Process Light (PPL) and thus can only be accessed by other protected processes with an equivalent or higher protection level.</td><td>Low</td><td>
+
+Key          : HKLM\SYSTEM\CurrentControlSet\Control\Lsa
+RunAsPPL     : (null)
+RunAsPPLBoot : (null)
+Description  : LSA Protection is not enabled.
+
+
+
+</td></tr> <tr><td>TA0006 - Credential Access</td><td>Scheduled Tasks - Hardcoded Credentials</td><td>Check whether there are scheduled tasks configured with hardcoded credentials (logon type &#39;Password&#39;), in which case the user account&#39;s password is stored in a reversible format in the registry, and can be extracted with administrator privileges.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>Services - Hardcoded Credentials</td><td>Check whether there are services configured with hardcoded credentials, in which case the service account&#39;s password is likely to be stored in a reversible format in the registry, and can be extracted with administrator privileges.</td><td>None</td><td></td></tr> <tr><td>TA0006 - Credential Access</td><td>User - Environment Variables</td><td>Check whether any environment variables contain sensitive information such as credentials or secrets. Note that this check follows a keyword-based approach and thus might not be completely reliable.</td><td>None</td><td></td></tr> <tr><td>TA0008 - Lateral Movement</td><td>Configuration - Hardened UNC Paths</td><td>Check whether sensitive UNC paths are properly hardened. Note that non-hardened UNC paths used for retrieving group policies can be hijacked through an MitM attack to obtain remote code execution as SYSTEM.</td><td>None</td><td></td></tr> <tr><td>TA0008 - Lateral Movement</td><td>Configuration - WSUS</td><td>Check whether WSUS uses the HTTPS protocol to retrieve updates from the on-premise update server. If WSUS uses the clear-text HTTP protocol, it is vulnerable to MitM attacks that may result in remote code execution as SYSTEM.</td><td>None</td><td>
+
+Key         : HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate
+Value       : WUServer
+Data        : (null)
+Description : No WSUS server is configured (default).
+
+Key         : HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU
+Value       : UseWUServer
+Data        : (null)
+Description : WSUS server not enabled (default).
+
+Key         : HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate
+Value       : SetProxyBehaviorForUpdateDetection
+Data        : (null)
+Description : Proxy fallback not configured (default).
+
+Key         : HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate
+Value       : DisableWindowsUpdateAccess
+Data        : (null)
+Description : Windows Update features are enabled (default).
+
+
+
+</td></tr> <tr><td>TA0008 - Lateral Movement</td><td>Hardening - LAPS</td><td>Check whether LAPS is configured and enabled. Note that this applies to domain-joined machines only.</td><td>None</td><td>
+
+Description : The machine is not domain-joined, this check is irrelevant.
+
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Applications - Microsoft</td><td>Get information about Microsoft applications installed on the machine by searching the registry and the default install locations.</td><td>None</td><td>
+Name                                                  Version         Path                                                        
+----                                                  -------         ----                                                        
+Internet Explorer                                     11.00.17763.1   C:\Program Files\internet explorer                          
+Microsoft Update Health Tools                         2.85.0.0                                                                    
+Microsoft Update Health Tools (Microsoft&#174; Windows&#174;... 10.0.17763.2624 C:\Program Files\Microsoft Update Health Tools              
+Microsoft Visual C++ 2015-2022 Redistributable (x6... 14.36.32532.0                                                               
+Microsoft Visual C++ 2015-2022 Redistributable (x8... 14.36.32532.0                                                               
+Microsoft Visual C++ 2022 X64 Additional Runtime -... 14.36.32532                                                                 
+Microsoft Visual C++ 2022 X64 Minimum Runtime - 14... 14.36.32532                                                                 
+Microsoft Visual C++ 2022 X86 Additional Runtime -... 14.36.32532                                                                 
+Microsoft Visual C++ 2022 X86 Minimum Runtime - 14... 14.36.32532                                                                 
+Windows Defender (Microsoft&#174; Windows&#174; Operating Sy... 4.18.17763.1    C:\Program Files\Windows Defender                           
+Windows Defender (Microsoft&#174; Windows&#174; Operating Sy... 4.18.1807.16384 C:\Program Files (x86)\Windows Defender                     
+Windows Defender Advanced Threat Protection (Micro... 10.5840.17763.1 C:\Program Files\Windows Defender Advanced Threat Protection
+Windows Mail (Microsoft&#174; Windows&#174; Operating System... 10.0.17763.1    C:\Program Files\Windows Mail                               
+Windows Media Player (Microsoft&#174; Windows&#174; Operatin... 12.0.17763.1    C:\Program Files\Windows Media Player                       
+Windows Multimedia Platform (Microsoft&#174; Windows&#174; O... 10.0.17763.1    C:\Program Files\Windows Multimedia Platform                
+Windows Photo Viewer (Microsoft&#174; Windows&#174; Operatin... 10.0.17763.1    C:\Program Files (x86)\Windows Photo Viewer                 
+Windows Portable Devices (Microsoft&#174; Windows&#174; Oper... 10.0.17763.1    C:\Program Files\Windows Portable Devices                   
+Windows Security (Microsoft&#174; Windows&#174; Operating Sy... 10.0.17763.1    C:\Program Files\Windows Security                           
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Applications - Running Processes</td><td>Get information about the currently running processes that are not owned by the current user. Processes such as &#39;svchost.exe&#39; are filtered out.</td><td>None</td><td>
+  Id SessionId Name                  Path                                          User
+  -- --------- ----                  ----                                          ----
+6512         1 ctfmon                C:\Windows\SYSTEM32\ctfmon.exe                    
+3992         0 dllhost               C:\Windows\SYSTEM32\dllhost.exe                   
+4564         0 dllhost               C:\Windows\SYSTEM32\dllhost.exe                   
+ 780         0 fontdrvhost           C:\Windows\SYSTEM32\fontdrvhost.exe               
+ 952         1 fontdrvhost           C:\Windows\SYSTEM32\fontdrvhost.exe               
+ 668         0 lsass                 C:\Windows\SYSTEM32\lsass.exe                     
+3600         0 MpDefenderCoreService                                                   
+4492         0 MsMpEng                                                                 
+4992         0 NisSrv                                                                  
+7044         0 SearchIndexer         C:\Windows\SYSTEM32\SearchIndexer.exe             
+6748         0 SecurityHealthService C:\Windows\SYSTEM32\SecurityHealthService.exe     
+1840         0 SetupHost                                                               
+5964         0 SgrmBroker            C:\Windows\SYSTEM32\SgrmBroker.exe                
+2232         0 spoolsv               C:\Windows\SYSTEM32\spoolsv.exe                   
+2932         0 VGAuthService                                                           
+2940         0 vm3dservice           C:\Windows\SYSTEM32\vm3dservice.exe               
+3128         1 vm3dservice           C:\Windows\SYSTEM32\vm3dservice.exe               
+2876         0 vmtoolsd                                                                
+1868         0 VSSVC                 C:\Windows\SYSTEM32\VSSVC.exe                     
+2420         0 WindowsUpdateBox                                                        
+ 512         0 wininit               C:\Windows\SYSTEM32\wininit.exe                   
+ 604         1 winlogon              C:\Windows\SYSTEM32\winlogon.exe                  
+4640         0 WmiPrvSE              C:\Windows\System32\Wbem\WmiPrvSE.exe             
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Applications - Third-Party</td><td>Get information about third-party applications installed on the machine by searching the registry and the default install locations.</td><td>None</td><td>
+Name                          Version         Path                         
+----                          -------         ----                         
+Google (Google Updater (x86)) 152.0.7933.0    C:\Program Files (x86)\Google
+Google Chrome                 133.0.6943.59   C:\Program Files\Google      
+VMware Tools                  12.4.0.23259341 C:\Program Files\VMware      
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Configuration - SCCM Cache Folders</td><td>Get information about SCCM cache folders (incl. number and list of binary, script, and text files).</td><td>None</td><td></td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Misc - Filesystem Drives</td><td>Get information about the partitions, removable storages, and mapped network shares.</td><td>None</td><td>
+Root DisplayRoot Description
+---- ----------- -----------
+C:\                         
+D:\                         
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Misc - Local Administrators Group</td><td>Get information about the users and groups in the local &#39;Administrators&#39; group.</td><td>None</td><td>
+Name               Type IsLocal IsEnabled
+----               ---- ------- ---------
+Administrator      User    True     False
+SuperAdministrator User    True      True
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Misc - Machine Role</td><td>Get information about the machine&#39;s role. Is it a Workstation, a Server, or a Domain Controller.</td><td>None</td><td>
+Name  Role       
+----  ----       
+WinNT Workstation
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Misc - System Information</td><td>Get information about the Windows version. Note that this information might be useful if the update history cannot be obtained.</td><td>None</td><td>
+
+ProductName           : Windows 10 Pro
+Version               : 10.0.17763 Version 1809 (17763.107)
+BuildString           : 17763.1.amd64fre.rs5_release.180914-1434
+BaseBoardManufacturer : Intel Corporation
+BaseBoardProduct      : 440BX Desktop Reference Platform
+BiosMode              : Uefi
+BiosReleaseDate       : 2025-07-21
+BiosVendor            : VMware, Inc.
+BiosVersion           : VMW201.00V.24866131.B64.2507211911
+SystemFamily          : 
+SystemManufacturer    : VMware, Inc.
+SystemProductName     : VMware20,1
+SystemSKU             : 
+
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Misc - TPM Device Information</td><td>Get information about the machine&#39;s Trusted Platform Module (TPM), if present.</td><td>None</td><td>
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Misc - User Home Folders</td><td>Get information about the local home folders and check whether the current user has read or write permissions.</td><td>None</td><td>
+HomeFolderPath               Read  Name
+--------------               ----  ----
+C:\Users\Public              True  True
+C:\Users\Sammy               True  True
+C:\Users\SuperAdministrator False False
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>Network - Interfaces</td><td>Get information about all active Ethernet adapters.</td><td>None</td><td>
+
+Name            : {14A4971E-AA2B-4538-BE70-A93E7FACE19D}
+FriendlyName    : Ethernet0
+Type            : Ethernet
+Status          : Up
+DnsSuffix       : localdomain
+Description     : Intel(R) 82574L Gigabit Network Connection
+PhysicalAddress : 00:0c:29:5f:a3:48
+Flags           : DdnsEnabled, Dhcpv4Enabled, NetBiosOverTcpIpEnabled, Ipv4Enabled, Ipv6Enabled
+IPv6            : fe80::c570:7f6f:c318:597a (/64)
+IPv4            : 172.16.220.129 (/24)
+Gateway         : 172.16.220.2
+DHCPv4Server    : 172.16.220.254
+DHCPv6Server    : 
+DnsServers      : 172.16.220.2
+DNSSuffixList   : 
+
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>User - Groups</td><td>Get information about the groups the current user belongs to (name, type, SID).</td><td>None</td><td>
+Name                                   Type           SID                                          
+----                                   ----           ---                                          
+DESKTOP-4V9TPK3\None                   Group          S-1-5-21-3687015499-3071869482-3054830844-513
+Everyone                               WellKnownGroup S-1-1-0                                      
+BUILTIN\Users                          Alias          S-1-5-32-545                                 
+NT AUTHORITY\INTERACTIVE               WellKnownGroup S-1-5-4                                      
+CONSOLE LOGON                          WellKnownGroup S-1-2-1                                      
+NT AUTHORITY\Authenticated Users       WellKnownGroup S-1-5-11                                     
+NT AUTHORITY\This Organization         WellKnownGroup S-1-5-15                                     
+NT AUTHORITY\Local account             WellKnownGroup S-1-5-113                                    
+NT AUTHORITY\LogonSessionId_0_739993   LogonSession   S-1-5-5-0-739993                             
+LOCAL                                  WellKnownGroup S-1-2-0                                      
+NT AUTHORITY\NTLM Authentication       WellKnownGroup S-1-5-64-10                                  
+Mandatory Label\Medium Mandatory Level Label          S-1-16-8192                                  
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>User - Identity</td><td>Get information about the current user (name, domain name) and its access token (SID, integrity level, authentication ID).</td><td>None</td><td>
+
+Name             : DESKTOP-4V9TPK3\Sammy
+SID              : S-1-5-21-3687015499-3071869482-3054830844-1000
+IntegrityLevel   : Medium Mandatory Level (S-1-16-8192)
+SessionId        : 1
+TokenId          : 00000000-0082e07a
+AuthenticationId : 00000000-000b4b93
+OriginId         : 00000000-000003e7
+ModifiedId       : 00000000-000b4bdf
+Source           : User32 (00000000-000b4b03)
+
+
+
+</td></tr> <tr><td>TA0043 - Reconnaissance</td><td>User - Restricted SIDs</td><td>Get information about potential restricted SIDs applied to the current user.</td><td>None</td><td></td></tr> </table>
+<script>
+const svgSortIcon = `<svg viewBox="0 0 16 16" fill="none"
+xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"
+stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 0L2
+6V7H14V6L8 0Z" fill="#ffffff"></path> <path d="M8 16L2 10V9H14V10L8 16Z"
+fill="#ffffff"></path> </g></svg>`;
+// Sort icon by Noah Jacobus: https://www.svgrepo.com/svg/535650/sort
+const svgFilterIcon = `<svg viewBox="0 0 24 24" fill="none"
+xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"
+stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path
+fill-rule="evenodd" clip-rule="evenodd" d="M4.2673 6.24223C2.20553 4.40955
+3.50184 1 6.26039 1H17.7396C20.4981 1 21.7945 4.40955 19.7327 6.24223L15.3356
+10.1507C15.1221 10.3405 15 10.6125 15 10.8981V21.0858C15 22.8676 12.8457
+23.7599 11.5858 22.5L9.58578 20.5C9.21071 20.1249 8.99999 19.6162 8.99999
+19.0858V10.8981C8.99999 10.6125 8.87785 10.3405 8.66436 10.1507L4.2673
+6.24223ZM6.26039 3C5.34088 3 4.90877 4.13652 5.59603 4.74741L9.99309
+8.6559C10.6336 9.22521 11 10.0412 11 10.8981V19.0858L13 21.0858V10.8981C13
+10.0412 13.3664 9.22521 14.0069 8.6559L18.404 4.74741C19.0912 4.13652 18.6591 3
+17.7396 3H6.26039Z" fill="#FFFFFF"></path> </g></svg>`;
+// Filter Icon by Konstantin Filatov: https://www.svgrepo.com/svg/521661/filter
+var cells = document.getElementsByTagName('td');
+
+for (var i = 0; i < cells.length; i++) {
+    var bg_color = null;
+    var bg_color_row = null;
+    let severity = null;
+    if (cells[i].innerHTML == "Low") {
+        bg_color = "bg_blue";
+        bg_color_row = "bg_blue_light";
+        severity = 1;
+    } else if (cells[i].innerHTML == "Medium") {
+        bg_color = "bg_orange";
+        bg_color_row = "bg_orange_light";
+        severity = 2;
+    } else if (cells[i].innerHTML == "High") {
+        bg_color = "bg_red";
+        bg_color_row = "bg_red_light";
+        severity = 3;
+    } else if (cells[i].innerHTML == "None") {
+        bg_color = "bg_grey";
+        bg_color_row = "bg_grey_light";
+        severity = 0;
+    }
+
+    if (bg_color) {
+        if (bg_color_row) { cells[i].parentElement.classList.add(bg_color_row); }
+        cells[i].innerHTML = "<span class=\"label " + bg_color + "\">" + cells[i].innerHTML + "</span>";
+        cells[i].dataset.severity = severity;
+    }
+
+    // If a cell is too large, we need to make it scrollable. But 'td' elements are not
+    // scrollable so, we need make it a 'div' first and apply the 'scroll' (c.f. CSS) style to make
+    // it scrollable.
+    cells[i].innerHTML = "<div class=\"scroll\">" + cells[i].innerHTML + "</div>";
+}
+
+
+function sortTable(columnIndex) {
+    const table = document.getElementsByTagName("table")[0];
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr")).slice(1);
+    const isAscending = table.dataset.sortOrder === "asc";
+
+    rows.sort((rowA, rowB) => {
+        const cellA = rowA.cells[columnIndex].dataset.severity || rowA.cells[columnIndex].textContent.trim();
+        const cellB = rowB.cells[columnIndex].dataset.severity || rowB.cells[columnIndex].textContent.trim();
+
+        return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+    });
+
+    for (const row of rows) {
+        row.remove();
+    }
+
+    tbody.append(...rows);
+
+    table.dataset.sortOrder = isAscending ? "desc" : "asc";
+}
+
+
+function createPopupMenu(button, options) {
+    if (!button) return;
+
+    const popup = document.createElement("div");
+    popup.style.position = "absolute";
+    popup.style.background = "white";
+    popup.style.border = "1px solid #ccc";
+    popup.style.padding = "10px";
+    popup.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+    popup.style.display = "none";
+    popup.style.zIndex = "1000";
+    popup.style.borderRadius = "5px";
+    popup.style["font-size"] = "0.8em";
+
+    options.forEach(option => {
+        const label = document.createElement("label");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = option.value;
+        checkbox.checked = option.checked || false;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(" " + option.label));
+        popup.appendChild(label);
+        popup.appendChild(document.createElement("br"));
+    });
+
+    const btnOk = document.createElement("button");
+    btnOk.textContent = "OK";
+    btnOk.style.marginRight = "5px";
+    btnOk.style.marginTop = "3px";
+    btnOk.onclick = () => {
+        const selected = Array.from(popup.querySelectorAll("input[type=checkbox]"))
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+        for (const row of document.getElementsByTagName("tr")) {
+            const severity = row.querySelector("span.label")?.closest("td").dataset.severity;
+            row.style.display = (selected.includes(severity) || (!severity)) ? "" : "none";
+        };
+        popup.style.display = "none";
+    };
+
+    const btnCancel = document.createElement("button");
+    btnCancel.textContent = "Cancel";
+    btnCancel.onclick = () => {
+        popup.style.display = "none";
+    };
+
+    popup.appendChild(btnOk);
+    popup.appendChild(btnCancel);
+    document.body.appendChild(popup);
+
+    button.addEventListener("click", (event) => {
+        const rect = button.getBoundingClientRect();
+        popup.style.top = `${rect.bottom + window.scrollY}px`;
+        popup.style.left = `${rect.left + window.scrollX}px`;
+        popup.style.display = popup.style.display === "none" ? "block" : "none";
+    });
+}
+
+// Add tool icons to column headers
+const headerCells = document.querySelectorAll('th');
+for (const [idx, cell] of headerCells.entries()) {
+    // Add sort button on columns category, DisplayName and Severity
+    if ([0,1,3].includes(idx)) {
+        const sortButton = document.createElement("a");
+        sortButton.href = '#';
+        sortButton.title = "Sort";
+        sortButton.innerHTML = svgSortIcon;
+        sortButton.classList.add("tool-button");
+
+        sortButton.addEventListener("click", (e) => sortTable(idx));
+
+        cell.append(" ");
+        cell.append(sortButton);
+    }
+
+    // Add filter button on severity column
+    if (idx === 3) {
+        const filterButton = document.createElement("a");
+        filterButton.href = '#';
+        filterButton.title = "Filter";
+        filterButton.innerHTML = svgFilterIcon;
+        createPopupMenu(filterButton, [
+            { label: "None", value: 0, checked: true },
+            { label: "Low", value: 1, checked: true },
+            { label: "Medium", value: 2, checked: true },
+            { label: "High", value: 3, checked: true },
+        ]);
+        cell.append(" ");
+        cell.append(filterButton);
+    }
+
+}
+
+</script>
+</body>
+</html>
