@@ -15,6 +15,6 @@
 powershell -ep bypass -c ". .\PrivescCheck.ps1; Invoke-PrivescCheck -Extended -Report PrivescCheck_$($env:COMPUTERNAME) -Format TXT,HTML"
 ```
 
-> The extended check will save the output as .txt and .html. You can download the html and open it in the new tab to analyze it further [here](writeups/1-task.html)
+> The extended check will save the output as .txt and .html. You can download the html and open it in the new tab to analyze it further [here](1-task.html)
 
 
