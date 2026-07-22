@@ -136,6 +136,6 @@ x86_64-w64-mingw32-g++ -shared -o SprintCSP.dll main.cpp
 > Now you have the .dll file. Transfer it to Windows:
 
 ```powershell
-
+Invoke-WebRequest -Uri "http://172.16.220.130/SprintCSP.dll" -OutFile "C:\Users\Student\Desktop\SprintCSP.dll"
 ```
 
