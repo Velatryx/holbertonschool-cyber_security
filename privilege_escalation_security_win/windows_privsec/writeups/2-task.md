@@ -127,8 +127,15 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 }
 ```
 
+> Open your kali, and use a cross compiler to conver the .cpp code to .dll:
+
+```shell
+x86_64-w64-mingw32-g++ -shared -o SprintCSP.dll main.cpp
+```
+
+> Now you have the .dll file. Transfer it to Windows:
+
 ```powershell
 
 ```
-
 
