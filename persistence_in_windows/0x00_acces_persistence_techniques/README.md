@@ -46,3 +46,9 @@ Virtual Machine (VM): VM
 The password for the student account is : Student
 
 The password for the SuperAdministrator account is : Root@123
+
+
+> DISCLAIMER:
+
+[ ! WARNING ]
+This repository is maintained strictly for ethical hacking education, defensive engineering research, and authorized red-team lab testing. Executing persistence mechanisms or unauthorized command chains against production systems without explicit, prior written legal consent is strictly illegal.
