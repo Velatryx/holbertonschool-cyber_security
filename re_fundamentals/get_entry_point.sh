@@ -20,17 +20,17 @@ fi
 # 2. Extract specific variables required by display_elf_header_info
 file_name="$target_file"
 
-# Extract Magic Number (strip leading whitespace)
-magic_number=$(readelf -h "$target_file" | awk -F':' '/Magic:/ {print $2}' | xargs)
+# Extract Magic Number
+magic_number=$(readelf -h "$target_file" | awk -F':' '/Magic:/ {print $2}' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
-# Extract Class (e.g., ELF32 or ELF64)
-class=$(readelf -h "$target_file" | awk -F':' '/Class:/ {print $2}' | xargs)
+# Extract Class
+class=$(readelf -h "$target_file" | awk -F':' '/Class:/ {print $2}' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
-# Extract Byte Order (Data field in readelf, e.g., 2's complement, little endian)
-byte_order=$(readelf -h "$target_file" | awk -F':' '/Data:/ {print $2}' | xargs)
+# Extract Byte Order (e.g., extracts "little endian" or "big endian")
+byte_order=$(readelf -h "$target_file" | awk -F':' '/Data:/ {print $2}' | sed -E 's/.*,(.*)/\1/' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
 # Extract Entry Point Address
-entry_point_address=$(readelf -h "$target_file" | awk -F':' '/Entry point address:/ {print $2}' | xargs -0)
+entry_point_address=$(readelf -h "$target_file" | awk -F':' '/Entry point address:/ {print $2}' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
 # 3. Call the function from messages.sh
 display_elf_header_info
