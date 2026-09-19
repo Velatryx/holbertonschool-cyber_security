@@ -87,7 +87,7 @@ certain libraries, even though these libraries were never present on the system.
 > Downloaded the SprintCSP.dll and .exe file. Copy it the dll into \Confluence\bin, and execute the .exe file.
 
 
-## Example DLL in C++;
+## Example DLL in C;
 
 ```C
 #include <windows.h>
