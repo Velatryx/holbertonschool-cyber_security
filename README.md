@@ -80,20 +80,20 @@ Focuses on binary deep-dives, mobile application analysis frameworks, privilege 
 #### 📁 Shells & Privilege Escalation
 * **`/privilege_escalation_security_shells`**
   * `0x00_what_the_shell` – Shell interactive mechanics, payload generation, and stabilization techniques
-* *[Upcoming]* **Linux & Windows Privilege Escalation** – Kernel exploits, misconfigured services, token manipulation, and enumeration checklists
+*   **Linux & Windows Privilege Escalation** – Kernel exploits, misconfigured services, token manipulation, and enumeration checklists
 
-#### 📁 Reverse Engineering & Malware Analysis *[In Progress]*
-* *[Upcoming]* **Reverse Engineering Fundamentals** – Assembly basics, disassembly, and control flow analysis
-* *[Upcoming]* **Static & Dynamic Analysis** – Analyzing compiled binaries using tools like Ghidra, IDA, and GDB
-* *[Upcoming]* **Malware Analysis** – Behavior tracking, signature matching, and basic sandboxing concepts
+#### 📁 Reverse Engineering & Malware Analysis   
+*   **Reverse Engineering Fundamentals** – Assembly basics, disassembly, and control flow analysis
+*   **Static & Dynamic Analysis** – Analyzing compiled binaries using tools like Ghidra, IDA, and GDB
+*   **Malware Analysis** – Behavior tracking, signature matching, and basic sandboxing concepts
 
-#### 📁 Mobile Application Security *[In Progress]*
-* *[Upcoming]* **Mobile Fundamentals** – Android/iOS sandboxing models and app architecture basics
-* *[Upcoming]* **Static & Dynamic Mobile Analysis** – Decompiling APKs/IPAs, tracking intent flaws, and utilizing runtime hooks (Frida/Objection)
+#### 📁 Mobile Application Security   
+*   **Mobile Fundamentals** – Android/iOS sandboxing models and app architecture basics
+*   **Static & Dynamic Mobile Analysis** – Decompiling APKs/IPAs, tracking intent flaws, and utilizing runtime hooks (Frida/Objection)
 
-#### 📁 Governance, Risk, Compliance & Ethics *[In Progress]*
-* *[Upcoming]* **Frameworks & Standards** – Implementing and auditing controls across NIST, ISO 2700X, and GDPR
-* *[Upcoming]* **Ethics in Cybersecurity** – Responsible disclosure models and operational ethics
+#### 📁 Governance, Risk, Compliance & Ethics   
+*   **Frameworks & Standards** – Implementing and auditing controls across NIST, ISO 2700X, and GDPR
+*   **Ethics in Cybersecurity** – Responsible disclosure models and operational ethics
 
 ---
 
