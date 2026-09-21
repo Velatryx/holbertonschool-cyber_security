@@ -1,4 +1,4 @@
-```markdown
+
 # Computer Security Incident Response Plan (CSIRP)
 
 **Framework Alignment:** NIST SP 800-61 Rev. 2  
@@ -23,8 +23,6 @@ This plan applies to all computing assets, endpoints, network devices, cloud env
 
 ## 2. Incident Response Process (NIST SP 800-61 Lifecycle)
 
-
-```
 ```
 +-----------------------------------------------------------------------+
 |                            1. PREPARATION                             |
@@ -45,7 +43,7 @@ v
 |                      4. POST-INCIDENT ACTIVITY                        |
 +-----------------------------------------------------------------------+
 ```
-```
+
 
 ### Phase 1: Preparation
 Preparation is the foundation of incident response. It ensures tools, infrastructure, and team members are ready before an incident happens.
@@ -186,4 +184,4 @@ To remain effective, this plan must be treated as a living document. It requires
 * **CISA Incident Response Resources:** [Cybersecurity & Infrastructure Security Agency Playbooks](https://www.cisa.gov/resources-tools/services/incident-response-services)
 * **FIRST Security Frameworks:** [Forum of Incident Response and Security Teams Guidelines](https://www.first.org/resources/guides/)
 
-```
+
