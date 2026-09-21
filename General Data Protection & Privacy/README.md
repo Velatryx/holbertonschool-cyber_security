@@ -221,5 +221,3 @@ Follow-up actions include conducting a comprehensive post-incident review 30 day
 * **EDPB Guidelines 9/2022:** [Guidelines on Personal Data Breach Notification under Regulation 2016/679](https://www.google.com/search?q=https://edpb.europa.eu/our-work-tools/documents/public-consultations-header/guidelines-092022-personal-data-breach_en&utm_source=gemini)
 * **ISO/IEC 27701:2019:** [Security techniques — Extension to ISO/IEC 27001 for privacy information management](https://www.iso.org/standard/71670.html?utm_source=gemini)
 * **NIST Privacy Framework:** [A Tool for Improving Privacy Through Enterprise Risk Management](https://www.nist.gov/privacy-framework?utm_source=gemini)
-
-```
