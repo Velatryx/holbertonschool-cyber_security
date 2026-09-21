@@ -1,4 +1,4 @@
-# holbertonschool-cyber_security
+# Holberton School - Cybersecurity Program
 
 This repository contains my solutions, automation scripts, and lab writeups from the Holberton School Cybersecurity curriculum, structured across consecutive 3-month training sprints, 10 months (3 sprints), and foundation (1 month) in total.
 
